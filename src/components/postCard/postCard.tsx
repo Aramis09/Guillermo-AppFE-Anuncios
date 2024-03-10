@@ -21,7 +21,7 @@ export default function PostCard({ postDetail }: Props) {
         setSyleSize(s.size3);
         break;
       case 4:
-        setSyleSize(s.size3);
+        setSyleSize(s.size4);
         break;
       default:
         setSyleSize(s.size1);

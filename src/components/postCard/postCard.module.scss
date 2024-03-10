@@ -1,29 +1,30 @@
 
   .size1,.size2,.size3, .size4,.size5 {
     width: 100%;
+    margin: 0;
+    padding: 0;
+    align-self: start;
+    margin:  0 auto;
   }
 
 
 
 .size1 {
   grid-column: span 1;
-  grid-row: span 1;
+
 
 }
 .size2 {
-  grid-column: span 2;
-  grid-row: span 2;
+  grid-column: span 1;
 
 
 }
 .size3 {
-  grid-column: span 3;
-  grid-row: span 3;
+  grid-column: span 1;
 }
 
 .size4 {
-  grid-column: span 4;
-  grid-row: span 4;
+  grid-column: span 2;
 }
 
     
@@ -33,29 +34,34 @@
 @media screen and (min-width: 768px) and (max-width: 1770px) {}
 
 @media screen and (min-width: 270px) and (max-width: 767px) {
-  .size1 {
-    grid-column: span 2;
-    grid-row: span 1;
+
   
-  }
-  .size2 {
-    grid-column: span 3;
-    grid-row: span 1;
-  }
-  .size3 {
-    grid-column: span 4;
-    grid-row: span 1;
+  .elemento {
+    background-color: lightblue;
   }
   
   .size4 {
-    grid-column: span 4;
-    grid-row: span 1;
+    width: 100vw;
+    width: calc(100vw - 4px);
+
+  }
+  
+  .size3 {
+    width: calc(50vw - 4px);
+
+  }
+  
+  .size2 {
+    // width: 40vw;
+    width: calc(43vw - 4px);
+    align-self: center;
+
+  }
+  
+  .size1 {
+    width: 20vw;
+    width: calc(38vw - 4px);
+    align-self: center;
   }
 
-  .size1:hover ,.size2:hover ,.size3:hover, .size4:hover,.size5:hover {
-
-    top: 0;
-    left: 0;
-    position: fixed;
-  }
 }
