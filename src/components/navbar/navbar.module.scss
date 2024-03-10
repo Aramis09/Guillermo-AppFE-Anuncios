@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 2rem;
+  background-color: #0B60B0;
+  padding-block:1rem ;
+  .links{
+    color: white;
+  }
+}

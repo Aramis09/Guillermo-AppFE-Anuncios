@@ -1,0 +1,61 @@
+
+  .size1,.size2,.size3, .size4,.size5 {
+    width: 100%;
+  }
+
+
+
+.size1 {
+  grid-column: span 1;
+  grid-row: span 1;
+
+}
+.size2 {
+  grid-column: span 2;
+  grid-row: span 2;
+
+
+}
+.size3 {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+
+.size4 {
+  grid-column: span 4;
+  grid-row: span 4;
+}
+
+    
+  
+
+
+@media screen and (min-width: 768px) and (max-width: 1770px) {}
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+  .size1 {
+    grid-column: span 2;
+    grid-row: span 1;
+  
+  }
+  .size2 {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+  .size3 {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+  
+  .size4 {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+
+  .size1:hover ,.size2:hover ,.size3:hover, .size4:hover,.size5:hover {
+
+    top: 0;
+    left: 0;
+    position: fixed;
+  }
+}
