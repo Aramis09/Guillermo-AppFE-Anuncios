@@ -3,11 +3,12 @@
     // width: 100%;
     margin: 0;
     padding: 0;
-    align-self: start;
+    // align-self: start;
     margin:  0 auto;
     grid-column: span 1;
     transition: all 0.2s;
     cursor: pointer;
+    border-radius: 0.2rem;
   }
 
 
@@ -24,13 +25,13 @@
   .size2 {
     // width: 40vw;
     width: calc(27vw - 4px);
-    align-self: start;
+    // align-self: start;
 
   }
   
   .size1 {
     width: calc(23vw - 4px);
-    align-self: center;
+    // align-self: center;
   }
 
 

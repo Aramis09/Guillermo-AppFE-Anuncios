@@ -1,0 +1,43 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .containerData{
+    width: 80vw;
+    padding: 5%;
+    margin: 0 auto;
+    margin-top: 5%;
+    columns: 2;
+    column-gap: 10px;
+    box-shadow: inset 0px 0px 100px  black;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+  }
+}
+
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0%;
+    .containerData{
+      width: 100%;
+      margin-top: 0px;
+      columns: 2;
+      column-gap: 0px;
+      box-shadow: inset 0px 0px 100px  black;
+      border-radius: 0.5rem;
+      background-color: greenyellow;
+
+    }
+    .infinite-scroll-component__outerdiv{
+      width: 100%; 
+      background-color: greenyellow;
+    }
+  }
+}
+

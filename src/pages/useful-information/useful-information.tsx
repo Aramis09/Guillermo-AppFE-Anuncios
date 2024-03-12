@@ -3,22 +3,24 @@ import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetPosts } from "../../interfaces/interfaces";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import s from "./home.module.scss";
-import s from "./prube.module.scss";
+import s from "../home/prube.module.scss";
 
 import useLoaderManage from "../../hooks/useLoader";
-// import { useLocation } from "react-router-dom";
 
-export default function Home() {
-  // const location = useLocation().pathname;
+export default function UsefulInformation() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
   const { result: posts, setResult } = useMakeRequest<ResponseGetPosts>({
-    url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
+    url: `${
+      import.meta.env.VITE_SOME_BASE_URL
+    }/posting?section=Useful%20Information`,
   });
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
     const newData: ResponseGetPosts = await fetch(
-      `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${posts?.nextPage}`
+      `${
+        import.meta.env.VITE_SOME_BASE_URL
+      }/posting?section=Useful%20Information&page=${posts?.nextPage}`
     ).then((res) => res.json());
     setResult((prev) => {
       if (prev) {
@@ -38,7 +40,6 @@ export default function Home() {
         next={hanlderMoreDataScroll}
         hasMore={true}
         loader={LoaderAllViewport}
-        className={s.infiniteScroll}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
@@ -54,21 +55,3 @@ export default function Home() {
     </div>
   );
 }
-
-// const urlSelectedByLocation = (
-//   pathname: string,
-//   page: number | undefined = 1
-// ) => {
-//   const base = `${import.meta.env.VITE_SOME_BASE_URL}`;
-//   if ("/" === pathname) {
-//     return `${base}/posting?&page=${page}`;
-//   }
-//   if ("/events" === pathname) {
-//     return `${base}/posting?section=Events&page=${page}`;
-//   }
-//   if ("/useful-info" === pathname) {
-//     console.log("entreeee");
-//     return `${base}/posting?section=Useful%20Information&page=${page}`;
-//   }
-//   return base + "posting";
-// };
