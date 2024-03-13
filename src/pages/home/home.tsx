@@ -6,22 +6,30 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import s from "./prube.module.scss";
 
 import useLoaderManage from "../../hooks/useLoader";
-// import { useLocation } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 export default function Home() {
-  // const location = useLocation().pathname;
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
-  const { result: posts, setResult } = useMakeRequest<ResponseGetPosts>({
+  const { statusUser } = useLogin();
+  console.log(statusUser);
+
+  const {
+    result: posts,
+    setResult,
+    makeNewRequest,
+  } = useMakeRequest<ResponseGetPosts>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
   });
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
-    const newData: ResponseGetPosts = await fetch(
-      `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${posts?.nextPage}`
-    ).then((res) => res.json());
+    const newData = await makeNewRequest<ResponseGetPosts>({
+      url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${
+        posts?.nextPage
+      }`,
+    });
     setResult((prev) => {
-      if (prev) {
+      if (prev && newData) {
         const newDataAdded = [...prev.data, ...newData.data];
         newData.data = newDataAdded;
         return newData;

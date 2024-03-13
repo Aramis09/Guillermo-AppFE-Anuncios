@@ -3,8 +3,6 @@
    .size1,.size2,.size3, .size4,.size5 {
     position: relative;
     display: flex;
-    // width: 100%;
-    margin: 0;
     padding: 0;
     transition: all 0.2s;
     cursor: pointer;
@@ -64,22 +62,81 @@
     // align-self: center;
   }
 
-
-
-
-
   .size1:hover,.size2:hover,.size3:hover{
-    transform: scale(1.1);
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0);
+    img {
+      transform: scale(120%);
+    }
+  }
+
+
+
+  
+
+
+@media screen and (min-width: 768px) and (max-width: 1770px) {
+  .size1,.size2,.size3, .size4,.size5 {
+ 
+    margin: 5px;
+    padding: 0%;
+    img {
+      border: none;
+    }
+  }
+
+  // .size1:active,.size2:active,.size3:active, .size4:active,.size5:active {
+  //   position: fixed;
+  //   width: 100%;
+  //   left: 0;
+  //   top: 0;
+  // }
+  .size4 {
+    column-span: all;
+    width: 100%;
+    margin-block:5px;
+    img {
+      width: 100%;
+    }
+  }
+  
+  .size3 {
+    width: 100%;
+    img {
+      width: calc(35vw - 4px);
+    }
+  }
+  
+  .size2 {
+    width: 100%;
+
+    img {
+      width: calc(30vw - 4px);
+
+    }
+
+  }
+  
+  .size1 {
+    width: 100%;
+
+    img {
+      width: calc(25vw - 4px);
+
+    }
+    
+  }
+  
+ 
+  .size1:hover,.size2:hover,.size3:hover{
+    transform: scale(1);
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0);
 
   }
-  
+}
 
-
-@media screen and (min-width: 768px) and (max-width: 1770px) {}
-
-@media screen and (min-width: 270px) and (max-width: 1190px) {
+@media screen and (min-width: 270px) and (max-width: 767px) {
   .size1,.size2,.size3, .size4,.size5 {
     position: relative;
     display: flex;
@@ -91,18 +148,11 @@
     border-radius: 0.2rem;
     margin: 0px;
     margin-block: 5px;
-    // background-color: black;
     img {
       border: none;
     }
   }
-  .size1:active,.size2:active,.size3:active, .size4:active,.size5:active {
-    background-color: red;
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 0;
-  }
+
   .size4 {
     column-span: all;
     width: 100%;
@@ -135,11 +185,15 @@
     img {
       width: calc(30vw - 4px);
     }
-    // align-self: center;
   }
   
- 
-  .size1:hover,.size2:hover,.size3:hover{
+  .size1:active,.size2:active,.size3:active, .size4:active,.size5:active {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  .size1:hover,.size2:hover,.size3:hover,.siz4:hover{
     transform: scale(1);
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0);

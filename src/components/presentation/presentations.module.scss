@@ -1,0 +1,32 @@
+.container{
+  width: 100%;
+  img {
+    // position: fixed;
+    position: relative;
+    width: 100%;
+    box-shadow: rgb(0, 0, 0) 0px 20px 130px;
+  }
+  .containerText {
+    position: absolute;
+    right: 10%;
+    top: 40%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    span{
+      color: rgb(255, 223, 18);
+    }
+    h2 {
+      font-size: 3rem;
+    }
+    button {
+      width: 20%;
+      min-height: 40px;
+      border-radius: 0.5rem;
+      border: none;
+      background-color: #bf3a5b;
+      color: white;
+    }
+  }
+}

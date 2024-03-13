@@ -9,7 +9,11 @@ import useLoaderManage from "../../hooks/useLoader";
 
 export default function UsefulInformation() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
-  const { result: posts, setResult } = useMakeRequest<ResponseGetPosts>({
+  const {
+    result: posts,
+    setResult,
+    makeNewRequest,
+  } = useMakeRequest<ResponseGetPosts>({
     url: `${
       import.meta.env.VITE_SOME_BASE_URL
     }/posting?section=Useful%20Information`,
@@ -17,13 +21,14 @@ export default function UsefulInformation() {
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
-    const newData: ResponseGetPosts = await fetch(
-      `${
+    const newData = await makeNewRequest<ResponseGetPosts>({
+      url: `${
         import.meta.env.VITE_SOME_BASE_URL
-      }/posting?section=Useful%20Information&page=${posts?.nextPage}`
-    ).then((res) => res.json());
+      }/posting?section=Useful%20Information&page=${posts?.nextPage}`,
+    });
+
     setResult((prev) => {
-      if (prev) {
+      if (prev && newData) {
         const newDataAdded = [...prev.data, ...newData.data];
         newData.data = newDataAdded;
         return newData;

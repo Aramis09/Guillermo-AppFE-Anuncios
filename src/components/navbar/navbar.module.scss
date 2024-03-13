@@ -1,15 +1,39 @@
 .container {
   width: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 10rem;
   font-size: 2rem;
   background-color: #0B60B0;
   padding-block:1rem ;
   z-index: 2000;
-  .links{
+  .links,.linkUser,.linkAdmin{
     color: white;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    img {
+      width: 30px;
+    }
+    .textHiden{
+      text-wrap: nowrap;
+      font-size: 1rem;
+    }
+  }
+  .linkUser{
+    position: absolute;
+    right: 50px;
+  }
+  .linkAdmin{
+    position: absolute;
+    left: 50px;
+    text-align: center;
   }
 }

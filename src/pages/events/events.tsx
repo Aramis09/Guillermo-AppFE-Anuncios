@@ -9,19 +9,25 @@ import useLoaderManage from "../../hooks/useLoader";
 
 export default function Events() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
-  const { result: posts, setResult } = useMakeRequest<ResponseGetPosts>({
+  const {
+    result: posts,
+    setResult,
+    makeNewRequest,
+  } = useMakeRequest<ResponseGetPosts>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?section=Events`,
   });
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
-    const newData: ResponseGetPosts = await fetch(
-      `${import.meta.env.VITE_SOME_BASE_URL}/posting?section=Events&page=${
+
+    const newData = await makeNewRequest<ResponseGetPosts>({
+      url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?section=Events&page=${
         posts?.nextPage
-      }`
-    ).then((res) => res.json());
+      }`,
+    });
+
     setResult((prev) => {
-      if (prev) {
+      if (prev && newData) {
         const newDataAdded = [...prev.data, ...newData.data];
         newData.data = newDataAdded;
         return newData;

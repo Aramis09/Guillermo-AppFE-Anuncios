@@ -29,7 +29,6 @@ export default function PostCard({ postDetail }: Props) {
         setSyleSize(s.size1);
     }
   }, [postDetail.size.size]);
-  console.log(postDetail);
 
   return (
     <div className={styleSize}>
