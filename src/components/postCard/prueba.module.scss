@@ -9,8 +9,13 @@
     margin: 10px;
     h3 {
       font-size: 3rem;
+
     }
     width: 100%;
+    img {
+      transition: all 0.2s;
+      border-radius: 0.5rem;
+    }
   }
 
   .size1,.size2,.size3 {
@@ -30,11 +35,14 @@
     column-span: all;
     width: 100%;
     margin-block:5px;
+    img {
+      width: 100%;
+    }
   }
   
   .size3 {
-    img {
     width: 100%;
+    img {
       
       width: calc(28vw - 4px);
     // align-self: start;
@@ -62,7 +70,7 @@
     // align-self: center;
   }
 
-  .size1:hover,.size2:hover,.size3:hover{
+  .size1:hover,.size2:hover,.size3:hover,img:hover{
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0);
     img {
@@ -95,6 +103,8 @@
     column-span: all;
     width: 100%;
     margin-block:5px;
+    overflow: hidden;
+    border: 10px greenyellow solid;
     img {
       width: 100%;
     }
@@ -157,6 +167,7 @@
     column-span: all;
     width: 100%;
     margin-block:5px;
+
     img {
       width: 100%;
     }
