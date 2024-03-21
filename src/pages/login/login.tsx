@@ -9,7 +9,6 @@ export default function Login() {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const fields = Object.fromEntries(new window.FormData(form));
-    console.log(fields);
     const user = fields["user"] as string;
     const password = fields["password"] as string;
     await makeUserLogin({ user, password });

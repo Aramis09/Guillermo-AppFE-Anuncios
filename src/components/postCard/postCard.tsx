@@ -42,7 +42,7 @@ export default function PostCard({ postDetail }: Props) {
 
   return (
     <div className={styleSize}>
-      {/* <h3 style={{ color: "white" }}>
+      {/* <h3 style={{ color: "black" }}>
         {postDetail.importance.importance} {postDetail.size.size}
       </h3> */}
       {/* <img src={postDetail.img} alt="image" className={styleSize} /> */}

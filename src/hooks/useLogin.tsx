@@ -21,6 +21,8 @@ export default function useLogin() {
   const { makeNewRequest } = useMakeRequest({});
 
   const isLoggedUser = useRef(async () => {
+    console.log(import.meta.env.VITE_SOME_BASE_URL);
+    
     const status = await makeNewRequest<RespVeriyToken>({
       url: `${import.meta.env.VITE_SOME_BASE_URL}/verificationToken`,
       method: "POST",

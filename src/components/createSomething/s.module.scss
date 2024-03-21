@@ -1,0 +1,47 @@
+.container {
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: centers;
+    align-items: center;
+    padding: 1%;
+    border-radius: 0.5rem;
+    button,input {
+        border: none;
+        border-radius: 0.5rem;
+        min-height: 30px;
+        cursor: pointer;
+    }
+    button {
+        min-width: 30px;
+        background-color: rgb(161, 161, 161);
+    }
+    form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        input {
+            width: 100%;
+            background-color: aquamarine;
+            text-align: center;
+            padding: 3%;
+        }
+    }
+    ul {
+        width: 100%;
+        display:  flex;
+        padding-block: 5%;
+        flex-direction: column;
+        li{
+            width: 100%;
+            text-align: left;
+            list-style: none;
+        }
+    }
+    .save {
+        width: 100%;
+        min-height: 40px;
+    }
+}

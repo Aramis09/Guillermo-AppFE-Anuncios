@@ -49,3 +49,16 @@ export interface Size {
   id: number;
   size: number;
 }
+
+
+
+export interface ResponseGetAllCategories {
+  message: string;
+  data:    CategoryDetail[];
+}
+
+export interface CategoryDetail {
+  id:   number;
+  name: string;
+}
+

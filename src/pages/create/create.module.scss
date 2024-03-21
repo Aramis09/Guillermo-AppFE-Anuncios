@@ -1,51 +1,19 @@
+
 .container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  margin-top:3% ;
-  height: 80vh;
-  .formLogin {
-    width: 50%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    h4 {
-      font-size: 2rem;
-      text-align: center;
-      color: white;
-      margin-bottom: 5px;
-      font-weight: 600;
+    align-items: start;
+    min-height: 100vh;
+    gap: 10px;
+    padding-block: 5%;
+    .link {
+        padding: 2%;
+        max-height: 10px;
+        background-color: #0B60B0;
+        text-align: center;
+        color: white;
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        line-height: 10px;
     }
-    img {
-      width: 100%;
-      border-radius: 0.5rem;
-
-    }
-    select, option,button {
-      border:none;
-      margin-block: 5px;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      width: 100%;
-      text-align: center;
-
-    }
-    select {
-      width: 100%;
-    }
-    button {
-      width: 100%;
-      background-color: #4CCD99;
-      color: white;
-      font-size: 1.2rem;
-    }
-    .err {
-      color: red;
-      font-weight: 400;
-    }
-  } 
 }

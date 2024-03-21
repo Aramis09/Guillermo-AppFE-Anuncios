@@ -11,7 +11,6 @@ import useLogin from "../../hooks/useLogin";
 export default function Navbar() {
   const location = useLocation().pathname;
   const { statusUser, logOutUser } = useLogin();
-  console.log(statusUser, location);
 
   return (
     <div className={s.container}>

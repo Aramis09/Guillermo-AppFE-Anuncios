@@ -1,5 +1,6 @@
 import s from "./presentations.module.scss";
 import imgBk from "../../assets/images/bk.jpg";
+import { Link } from "react-router-dom";
 
 export default function Presentation() {
   return (
@@ -15,7 +16,7 @@ export default function Presentation() {
           <br />
           todo para hacer de nuestro barrio cada dia mejor...
         </p>
-        <button>PUBLICITE AQUI</button>
+        <Link to="/contact" className={s.button}>PUBLICITE AQUI</Link>
       </div>
     </div>
   );
