@@ -16,6 +16,15 @@
       transition: all 0.2s;
       border-radius: 0.5rem;
     }
+    .contact {
+      z-index: 3000;
+      position: absolute;
+      background-color: white;
+      right: 2rem;
+      bottom: 2rem;
+      width: 4rem;
+      height: 4rem;
+    }
   }
 
   .size1,.size2,.size3 {
@@ -75,6 +84,10 @@
     background-color: rgba(0, 0, 0, 0);
     img {
       transform: scale(120%);
+    }
+    .contact {
+      transform: scale(100%);
+
     }
   }
 

@@ -9,12 +9,7 @@ export interface ResponseGetPosts {
 
 export interface PostDetail {
   id: number;
-  title: string;
-  description: string;
   img: string;
-  number_phone: string;
-  personal_page: string;
-  location: Location;
   userId: number;
   sizeId: number;
   importanceId: number;
@@ -23,6 +18,8 @@ export interface PostDetail {
   size: Size;
   importance: ImportanceClass;
   section: Section;
+  contactValue:string;
+  contactType:string
 }
 
 export interface ImportanceClass {

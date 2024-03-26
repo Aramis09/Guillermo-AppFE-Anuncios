@@ -9,6 +9,8 @@
     transition: all 0.2s;
     cursor: pointer;
     border-radius: 0.2rem;
+    position: relative;
+
   }
 
 
@@ -42,9 +44,13 @@
   
 
 
-@media screen and (min-width: 768px) and (max-width: 1770px) {}
+@media screen and (min-width: 768px) and (max-width: 1770px) {
+
+}
 
 @media screen and (min-width: 270px) and (max-width: 1190px) {
+
+
 
 
   

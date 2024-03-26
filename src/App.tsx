@@ -30,6 +30,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/events" element={<Events />} />
         <Route path="/useful-info" element={<UsefulInformation />} />
+        <Route path="/*" element={<div style={{margin:"0 auto"}}> No se encontro la pagina </div>} />
+
       </Routes>
     </>
   );
