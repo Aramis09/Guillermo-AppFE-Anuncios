@@ -4,21 +4,26 @@ import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import UploadWidget from "../../components/uploadImage/uploadImage";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
-import { ResponseGetAllCategories } from "../../interfaces/interfaces";
+import { ResponseGetAllCategories, ResponseGetAllContacts } from "../../interfaces/interfaces";
 
 export default function CreatePost() {
   const [publicId, setPublicId] = useState("");
   const [err, setErr] = useState<string | boolean>(false);
 
-  const [categoriesSelected, setCategoriesSelected ] = useState<string[]>([])
-  
-  const { result:categories, makeNewRequest } = useMakeRequest<ResponseGetAllCategories>({
-    url:`${import.meta.env.VITE_SOME_BASE_URL}/category`, 
+  const [categoriesSelected, setCategoriesSelected] = useState<string[]>([])
+
+  const { result: categories, makeNewRequest } = useMakeRequest<ResponseGetAllCategories>({
+    url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
+  });
+  const { result: sections } = useMakeRequest<ResponseGetAllCategories>({
+    url: `${import.meta.env.VITE_SOME_BASE_URL}/section`,
   });
 
-  const { result:sections } = useMakeRequest<ResponseGetAllCategories>({
-    url:`${import.meta.env.VITE_SOME_BASE_URL}/section`, 
+  const { result: contacts } = useMakeRequest<ResponseGetAllContacts>({
+    url: `${import.meta.env.VITE_SOME_BASE_URL}/contact`,
   });
+  console.log(contacts);
+
 
   const cld = new Cloudinary({
     cloud: {
@@ -30,14 +35,20 @@ export default function CreatePost() {
     if (publicId === "") {
       return setErr("Por favor suba una imagen");
     }
+    if (!categories?.data.length) alert("Por favor primero cree por lo menos una categoria para poder asignarle a la imagen")
+
     const form = event.target as HTMLFormElement;
     const fields = Object.fromEntries(new window.FormData(form));
     console.log(fields);
-   
+
 
     const importance = fields["importance"] as string;
     const size = fields["size"] as string;
     const section = fields["section"] as string;
+    const contactValue = fields["contactValue"] as string;
+    const contactType = fields["contactType"] as string;
+
+
 
     await makeNewRequest({
       method: "POST",
@@ -47,30 +58,33 @@ export default function CreatePost() {
         importance,
         section,
         img: publicId,
-        categories:categoriesSelected
+        categories: categoriesSelected,
+        contactValue,
+        contactType
       },
     });
   };
 
   const myImage = cld.image(publicId);
 
-  const handleCategories = (evt:React.ChangeEvent<HTMLSelectElement>)=> {
+  const handleCategories = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const options = evt.target.options;
     const currentIndexSelected = evt.target.selectedIndex;
     for (let i = 0; i < options.length; i++) {
-      
+
       if (options[i].index === currentIndexSelected) {
-        if(!categoriesSelected.includes(options[i].value)) {
-          setCategoriesSelected(prev => [...prev,options[i].value]);
+        if (!categoriesSelected.includes(options[i].value)) {
+          setCategoriesSelected(prev => [...prev, options[i].value]);
         }
-       else { setCategoriesSelected(prev => {
-          const newState = prev.filter(nameCat => nameCat !== options[i].value)
-          return newState
-        });
-       }
+        else {
+          setCategoriesSelected(prev => {
+            const newState = prev.filter(nameCat => nameCat !== options[i].value)
+            return newState
+          });
+        }
       }
     }
-    
+
   }
 
   return (
@@ -100,17 +114,28 @@ export default function CreatePost() {
           <option value="" disabled selected>
             Seccion
           </option>
-          {sections?.data.map(sections => <option key={sections.id}  value={sections.name}>{sections.name}</option>)}
-          
+          {sections?.data.map(sections => <option key={sections.id} value={sections.name}>{sections.name}</option>)}
+
         </select>
         <select name="categories" id="categories" value={categoriesSelected} multiple required onChange={handleCategories}>
           <option value="" disabled selected>
-            Categories
+            Elija una categoria
           </option>
-          {categories?.data.map(category => <option key={category.id}  value={category.name}>{category.name}</option>)}
+          {categories?.data.map(category => <option key={category.id} value={category.name}>{category.name}</option>)}
         </select>
+        <div>
+          Define un medio de contacto
+          <select name="contactType" id="contactType">
+            <option value="" disabled selected>
+              Tipo de contacto
+            </option>
+            {contacts?.data.map(ct => <option value={ct.type}>{ct.type}</option>)}
+          </select>
+          escriba el contacto
+          <input type="text" name="contactValue" />
+        </div>
         <button type="submit" name="login">
-          Entrar
+          Crear
         </button>
         <p className={s.err}>{err ? err : ""}</p>
       </form>

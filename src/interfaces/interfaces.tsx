@@ -18,8 +18,8 @@ export interface PostDetail {
   size: Size;
   importance: ImportanceClass;
   section: Section;
-  contactValue:string;
-  contactType:string
+  contactValue: string;
+  contactType: "whatsapp" | "personal-page" | "direct-phone" | "none"
 }
 
 export interface ImportanceClass {
@@ -51,11 +51,19 @@ export interface Size {
 
 export interface ResponseGetAllCategories {
   message: string;
-  data:    CategoryDetail[];
+  data: CategoryDetail[];
 }
 
 export interface CategoryDetail {
-  id:   number;
+  id: number;
   name: string;
 }
 
+export interface ResponseGetAllContacts {
+  message: string;
+  data: ContactDetail[];
+}
+
+export interface ContactDetail {
+  type: string;
+}

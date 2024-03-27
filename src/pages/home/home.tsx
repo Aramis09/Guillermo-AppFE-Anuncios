@@ -7,12 +7,14 @@ import s from "./prube.module.scss";
 
 import useLoaderManage from "../../hooks/useLoader";
 import useLogin from "../../hooks/useLogin";
+import Categories from "../../components/categories/categories";
+import { useGetPostListQuery } from "../../redux/services/apiPost";
+import { useState } from "react";
 
 export default function Home() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
   const { statusUser } = useLogin();
-  console.log(statusUser);
-
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const {
     result: posts,
     setResult,
@@ -20,13 +22,16 @@ export default function Home() {
   } = useMakeRequest<ResponseGetPosts>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
   });
+  // const { isSuccess ,data } = useGetPostListQuery({ url: `/posting`, urlCategories: `/posting/getListFiltered`, page: currentPage, categories: [""] })
+
+
+
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
     const newData = await makeNewRequest<ResponseGetPosts>({
-      url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${
-        posts?.nextPage
-      }`,
+      url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${posts?.nextPage
+        }`,
     });
     setResult((prev) => {
       if (prev && newData) {
@@ -41,6 +46,7 @@ export default function Home() {
 
   return (
     <div className={s.container}>
+      <Categories positionCoordinates="" />
       <InfiniteScroll
         dataLength={posts.data.length} //This is important field to render the next data
         next={hanlderMoreDataScroll}

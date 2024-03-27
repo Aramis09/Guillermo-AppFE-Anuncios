@@ -39,7 +39,6 @@ export default function PostCard({ postDetail }: Props) {
       default:
         setSyleSize(s.size1);
     }
-    console.log(postDetail);
 
     switch (postDetail.contactType) {
       case "whatsapp":
@@ -61,12 +60,15 @@ export default function PostCard({ postDetail }: Props) {
   const myImage = cld.image(postDetail.img);
 
   const hanlderRedirectToContact = () => {
-    console.log("Entro ??");
     if (
       postDetail.contactType === "personal-page" ||
       postDetail.contactType === "whatsapp"
     ) {
       window.location.href = postDetail.contactValue;
+    }
+    if (postDetail.contactType === "direct-phone") {
+      navigator.clipboard.writeText(postDetail.contactValue)
+      alert(`El telefono ${postDetail.contactValue} fue copiado en su portapapeles`)
     }
   };
 

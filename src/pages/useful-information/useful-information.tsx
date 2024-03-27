@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import s from "../home/prube.module.scss";
 
 import useLoaderManage from "../../hooks/useLoader";
+import Categories from "../../components/categories/categories";
 
 export default function UsefulInformation() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
@@ -14,17 +15,15 @@ export default function UsefulInformation() {
     setResult,
     makeNewRequest,
   } = useMakeRequest<ResponseGetPosts>({
-    url: `${
-      import.meta.env.VITE_SOME_BASE_URL
-    }/posting?section=Useful%20Information`,
+    url: `${import.meta.env.VITE_SOME_BASE_URL
+      }/posting?section=Useful%20Information`,
   });
 
   const hanlderMoreDataScroll = async () => {
     setLoaderStatus(true);
     const newData = await makeNewRequest<ResponseGetPosts>({
-      url: `${
-        import.meta.env.VITE_SOME_BASE_URL
-      }/posting?section=Useful%20Information&page=${posts?.nextPage}`,
+      url: `${import.meta.env.VITE_SOME_BASE_URL
+        }/posting?section=Useful%20Information&page=${posts?.nextPage}`,
     });
 
     setResult((prev) => {
@@ -40,6 +39,7 @@ export default function UsefulInformation() {
 
   return (
     <div className={s.container}>
+      <Categories positionCoordinates="" />
       <InfiniteScroll
         dataLength={posts.data.length} //This is important field to render the next data
         next={hanlderMoreDataScroll}
