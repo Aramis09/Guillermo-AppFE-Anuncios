@@ -12,6 +12,7 @@ import CreateCategory from "./pages/createCategory/createCategory";
 import CreateSection from "./pages/createSection/createSection";
 import CreatePost from "./pages/createPost/createPost";
 import Contact from "./pages/contact/contact";
+import EditPost from "./pages/editPost/editPost";
 
 function App() {
   const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
@@ -30,8 +31,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/events" element={<Events />} />
         <Route path="/useful-info" element={<UsefulInformation />} />
-        <Route path="/*" element={<div style={{margin:"0 auto"}}> No se encontro la pagina </div>} />
+        <Route path="/edit" element={<EditPost />} />
 
+        <Route
+          path="/*"
+          element={
+            <div style={{ margin: "0 auto" }}> No se encontro la pagina </div>
+          }
+        />
       </Routes>
     </>
   );

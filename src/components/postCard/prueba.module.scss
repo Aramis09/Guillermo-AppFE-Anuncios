@@ -17,14 +17,23 @@
     transition: all 0.2s;
     border-radius: 0.5rem;
   }
-  .contact {
+  .containerIcons{
+    // background-color: red;
+    width: 100%;
     z-index: 1999;
     position: absolute;
-    background-color: white;
-    right: 2rem;
-    bottom: 2rem;
-    width: 4rem;
-    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    gap: 20px;
+    .contact {
+      // position: absolute;
+      background-color: white;
+      width: 4rem;
+      height: 4rem;
+    }
+
   }
 }
 
@@ -90,7 +99,7 @@ img:hover {
     transform: scale(120%);
   }
   .contact {
-    transform: scale(100%);
+    // transform: scale(110%);
   }
 }
 

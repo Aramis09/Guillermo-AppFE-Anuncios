@@ -25,9 +25,17 @@ interface Params {
     publicId: string;
     categoriesSelected: string[];
   }) => Promise<void>;
+
+  title?: string;
+
+  required?: boolean;
 }
 
-export default function FormToSavePost({ onSave }: Params) {
+export default function FormToSavePost({
+  onSave,
+  title = "Subir anuncio",
+  required = true,
+}: Params) {
   const [publicId, setPublicId] = useState("");
   const [err, setErr] = useState<string | boolean>(false);
 
@@ -73,7 +81,7 @@ export default function FormToSavePost({ onSave }: Params) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (publicId === "") {
+    if (publicId === "" && required) {
       return setErr("Por favor suba una imagen");
     }
     if (!categories?.data.length)
@@ -103,10 +111,10 @@ export default function FormToSavePost({ onSave }: Params) {
   return (
     <section className={s.container} onSubmit={handleSubmit}>
       <form className={s.formLogin}>
-        <h4>Subir anuncio</h4>
+        <h4>{title}</h4>
         <UploadWidget setPublicId={setPublicId} />
         <AdvancedImage cldImg={myImage} />
-        <select name="size" id="size" required>
+        <select name="size" id="size" required={required}>
           <option value="" disabled selected>
             Tamaño
           </option>
@@ -115,7 +123,7 @@ export default function FormToSavePost({ onSave }: Params) {
           <option value="3">3</option>
           <option value="4">4</option>
         </select>
-        <select name="importance" id="importance" required>
+        <select name="importance" id="importance" required={required}>
           <option value="" disabled selected>
             Importancia
           </option>
@@ -123,7 +131,7 @@ export default function FormToSavePost({ onSave }: Params) {
           <option value="B">B</option>
           <option value="C">C</option>
         </select>
-        <select name="section" id="section" required>
+        <select name="section" id="section" required={required}>
           <option value="" disabled selected>
             Seccion
           </option>
@@ -138,7 +146,7 @@ export default function FormToSavePost({ onSave }: Params) {
           id="categories"
           value={categoriesSelected}
           multiple
-          required
+          required={required}
           onChange={handleCategories}
         >
           <option value="" disabled selected>

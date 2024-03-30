@@ -9,6 +9,10 @@ import wppIcon from "../../assets/icons/wpp.svg";
 import phoneIcon from "../../assets/icons/phone.svg";
 import webIcon from "../../assets/icons/web.svg";
 import linkIcon from "../../assets/icons/web.svg";
+import editIcon from "../../assets/icons/edit.svg";
+
+import useLogin from "../../hooks/useLogin";
+import { Link } from "react-router-dom";
 
 interface Props {
   postDetail: PostDetail;
@@ -17,6 +21,8 @@ interface Props {
 export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
+  const { statusUser } = useLogin();
+
   const cld = new Cloudinary({
     cloud: {
       cloudName: import.meta.env.VITE_SOME_CLOUD_NAME,
@@ -67,28 +73,36 @@ export default function PostCard({ postDetail }: Props) {
       window.location.href = postDetail.contactValue;
     }
     if (postDetail.contactType === "direct-phone") {
-      navigator.clipboard.writeText(postDetail.contactValue)
-      alert(`El telefono ${postDetail.contactValue} fue copiado en su portapapeles`)
+      navigator.clipboard.writeText(postDetail.contactValue);
+      alert(
+        `El telefono ${postDetail.contactValue} fue copiado en su portapapeles`
+      );
     }
   };
+  console.log(statusUser);
 
   return (
     <div className={styleSize}>
-      {/* <h3 style={{ color: "black" }}>
-        {postDetail.importance.importance} {postDetail.size.size}
-      </h3> */}
-      {/* <img src={postDetail.img} alt="image" className={styleSize} /> */}
       <AdvancedImage cldImg={myImage} alt="image" />
-      {!!iconContact ? (
-        <img
-          src={iconContact}
-          alt="contact"
-          className={s.contact}
-          onClick={hanlderRedirectToContact}
-        />
-      ) : (
-        <></>
-      )}
+      <div className={s.containerIcons}>
+        {!!iconContact ? (
+          <img
+            src={iconContact}
+            alt="contact"
+            className={s.contact}
+            onClick={hanlderRedirectToContact}
+          />
+        ) : (
+          <></>
+        )}
+        {statusUser.acces ? (
+          <Link to="/edit">
+            <img src={editIcon} alt="contact" className={s.contact} />
+          </Link>
+        ) : (
+          <></>
+        )}
+      </div>
     </div>
   );
 }
