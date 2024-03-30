@@ -11,47 +11,67 @@ import Categories from "../../components/categories/categories";
 
 export default function Home() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [posts, setPosts] = useState<ResponseGetPosts>()
-  const [categorySelected, setCategorySelected] = useState<string[]>([])
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [posts, setPosts] = useState<ResponseGetPosts>();
+  const [categorySelected, setCategorySelected] = useState<string[]>([]);
 
+  const { isSuccess, data: newData } = useGetPostListQuery({
+    url: `/posting`,
+    urlCategories: `/posting/getListFiltered`,
+    page: currentPage,
+    categories: categorySelected,
+  });
 
-  const { isSuccess, data: newData } = useGetPostListQuery({ url: `/posting`, urlCategories: `/posting/getListFiltered`, page: currentPage, categories: categorySelected })
-
-  console.log(newData);
+  console.log(newData, "<<<aqui");
 
   useEffect(() => {
-    if (currentPage === 1 && newData?.currentPage === 1) return setPosts(newData);
-    if (newData && newData.data.length !== 0 && newData.currentPage !== currentPage && newData.currentPage > currentPage) {
-      console.log(`paginaReq:${newData.currentPage}`, `pagina:${currentPage}`, newData.data, categorySelected);
+    if (currentPage === 1 && newData?.currentPage === 1)
+      return setPosts(newData);
+    if (
+      newData &&
+      newData.data.length !== 0 &&
+      newData.currentPage !== currentPage &&
+      newData.currentPage > currentPage
+    ) {
+      console.log(
+        `paginaReq:${newData.currentPage}`,
+        `pagina:${currentPage}`,
+        newData.data,
+        categorySelected
+      );
       setPosts(
-        prev => prev && ({
-          ...newData,
-          data: [...prev.data, ...newData.data]
-        })
-      )
-
+        (prev) =>
+          prev && {
+            ...newData,
+            data: [...prev.data, ...newData.data],
+          }
+      );
     }
-  }, [newData, currentPage, isSuccess])
-
+  }, [newData, currentPage, isSuccess]);
 
   const hanlderMoreDataScroll = async () => {
-    if (posts?.pages === currentPage) return //! there is not more pages to render.
+    if (posts?.pages === currentPage) return; //! there is not more pages to render.
     setLoaderStatus(true);
     setTimeout(() => {
-      posts && setCurrentPage(posts.nextPage)
+      posts && setCurrentPage(posts.nextPage);
     }, 210);
-
   };
 
-  const handlerChangeCategory = ({ categorySelected }: { categorySelected: string }) => {
+  const handlerChangeCategory = ({
+    categorySelected,
+  }: {
+    categorySelected: string;
+  }) => {
     setPosts(undefined);
     setCategorySelected([categorySelected]);
-  }
-  if (!posts || !posts.data) return <>
-    <Categories onClick={handlerChangeCategory} />
-    Error ...
-  </>;
+  };
+  if (!posts || !posts.data)
+    return (
+      <>
+        <Categories onClick={handlerChangeCategory} />
+        Error ...
+      </>
+    );
 
   return (
     <div className={s.container}>
@@ -77,4 +97,3 @@ export default function Home() {
     </div>
   );
 }
-
