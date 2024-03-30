@@ -3,20 +3,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
-  .containerData{
+  // margin-top: 100px;
+  padding-block: 5%;
+  .containerData {
     width: 80vw;
     padding: 5%;
     margin: 0 auto;
     margin-top: 5%;
     columns: 2;
     column-gap: 10px;
-    box-shadow: inset 0px 0px 100px  black;
+    box-shadow: inset 0px 0px 100px black;
     border-radius: 0.5rem;
     background-color: rgb(255, 255, 255);
   }
 }
-
 
 @media screen and (min-width: 270px) and (max-width: 767px) {
   .container {
@@ -25,18 +25,16 @@
     justify-content: center;
     align-items: center;
     padding: 0%;
-    .containerData{
+    .containerData {
       width: 100%;
       margin-top: 0px;
       columns: 2;
       column-gap: 0px;
-      box-shadow: inset 0px 0px 100px  black;
+      box-shadow: inset 0px 0px 100px black;
       border-radius: 0.5rem;
-
     }
-    .infinite-scroll-component__outerdiv{
-      width: 100%; 
+    .infinite-scroll-component__outerdiv {
+      width: 100%;
     }
   }
 }
-

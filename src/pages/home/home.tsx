@@ -1,52 +1,61 @@
 import PostCard from "../../components/postCard/postCard";
-import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetPosts } from "../../interfaces/interfaces";
 import InfiniteScroll from "react-infinite-scroll-component";
 // import s from "./home.module.scss";
 import s from "./prube.module.scss";
 
 import useLoaderManage from "../../hooks/useLoader";
-import useLogin from "../../hooks/useLogin";
-import Categories from "../../components/categories/categories";
 import { useGetPostListQuery } from "../../redux/services/apiPost";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Categories from "../../components/categories/categories";
 
 export default function Home() {
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
-  const { statusUser } = useLogin();
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const {
-    result: posts,
-    setResult,
-    makeNewRequest,
-  } = useMakeRequest<ResponseGetPosts>({
-    url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
-  });
-  // const { isSuccess ,data } = useGetPostListQuery({ url: `/posting`, urlCategories: `/posting/getListFiltered`, page: currentPage, categories: [""] })
+  const [posts, setPosts] = useState<ResponseGetPosts>()
+  const [categorySelected, setCategorySelected] = useState<string[]>([])
 
 
+  const { isSuccess, data: newData } = useGetPostListQuery({ url: `/posting`, urlCategories: `/posting/getListFiltered`, page: currentPage, categories: categorySelected })
+
+  console.log(newData);
+
+  useEffect(() => {
+    if (currentPage === 1 && newData?.currentPage === 1) return setPosts(newData);
+    if (newData && newData.data.length !== 0 && newData.currentPage !== currentPage && newData.currentPage > currentPage) {
+      console.log(`paginaReq:${newData.currentPage}`, `pagina:${currentPage}`, newData.data, categorySelected);
+      setPosts(
+        prev => prev && ({
+          ...newData,
+          data: [...prev.data, ...newData.data]
+        })
+      )
+
+    }
+  }, [newData, currentPage, isSuccess])
 
 
   const hanlderMoreDataScroll = async () => {
+    if (posts?.pages === currentPage) return //! there is not more pages to render.
     setLoaderStatus(true);
-    const newData = await makeNewRequest<ResponseGetPosts>({
-      url: `${import.meta.env.VITE_SOME_BASE_URL}/posting?page=${posts?.nextPage
-        }`,
-    });
-    setResult((prev) => {
-      if (prev && newData) {
-        const newDataAdded = [...prev.data, ...newData.data];
-        newData.data = newDataAdded;
-        return newData;
-      }
-    });
+    setTimeout(() => {
+      posts && setCurrentPage(posts.nextPage)
+    }, 210);
+
   };
 
-  if (!posts || !posts.data) return <> Error ...</>;
+  const handlerChangeCategory = ({ categorySelected }: { categorySelected: string }) => {
+    setPosts(undefined);
+    setCategorySelected([categorySelected]);
+  }
+  if (!posts || !posts.data) return <>
+    <Categories onClick={handlerChangeCategory} />
+    Error ...
+  </>;
 
   return (
     <div className={s.container}>
-      <Categories positionCoordinates="" />
+      <Categories onClick={handlerChangeCategory} />
       <InfiniteScroll
         dataLength={posts.data.length} //This is important field to render the next data
         next={hanlderMoreDataScroll}
@@ -69,20 +78,3 @@ export default function Home() {
   );
 }
 
-// const urlSelectedByLocation = (
-//   pathname: string,
-//   page: number | undefined = 1
-// ) => {
-//   const base = `${import.meta.env.VITE_SOME_BASE_URL}`;
-//   if ("/" === pathname) {
-//     return `${base}/posting?&page=${page}`;
-//   }
-//   if ("/events" === pathname) {
-//     return `${base}/posting?section=Events&page=${page}`;
-//   }
-//   if ("/useful-info" === pathname) {
-//     console.log("entreeee");
-//     return `${base}/posting?section=Useful%20Information&page=${page}`;
-//   }
-//   return base + "posting";
-// };

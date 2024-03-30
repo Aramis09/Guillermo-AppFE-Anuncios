@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LoaderAllPage } from "../components/loader/loader";
+import { LoaderAllPage, StaticLoader } from "../components/loader/loader";
 import { useLocation } from "react-router-dom";
 
 interface Props {
@@ -30,5 +30,5 @@ export default function useLoaderManage({
     <LoaderAllPage status={loaderStatus} setStatus={setLoaderStatus} />
   );
 
-  return { LoaderAllViewport, loaderStatus, setLoaderStatus };
+  return { LoaderAllViewport, loaderStatus, setLoaderStatus, StaticLoader };
 }

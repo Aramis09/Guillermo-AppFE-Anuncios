@@ -16,11 +16,11 @@ export function LoaderAllPage({
 
   useEffect(() => {
     if (status) {
-      setStyles({ opacity: 1, zIndex: 90, transition: "all 0.1s" });
+      setStyles({ opacity: 1, zIndex: 1999, transition: "all 0.2s" });
       setTimeout(() => {
         setStyles({ opacity: 0, zIndex: 0, transition: "all 0.2s" });
         setStatus(false);
-      }, 200);
+      }, 1000);
     }
   }, [status, setStatus]);
 
@@ -29,4 +29,11 @@ export function LoaderAllPage({
       <Loader />
     </div>
   );
+}
+
+
+export function StaticLoader() {
+  return <div className={s.loaderAllPage} style={{ opacity: 1, zIndex: 1999 }}>
+    <Loader />
+  </div>
 }

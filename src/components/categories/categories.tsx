@@ -3,19 +3,18 @@ import { useMakeRequest } from '../../hooks/useMakeRequest'
 import { ResponseGetAllCategories } from '../../interfaces/interfaces';
 
 interface Props {
-    positionCoordinates: string
+    positionCoordinates?: string,
+    onClick: ({ categorySelected }: { categorySelected: string }) => void
 }
 
-export default function Categories({ }: Props) {
-    const { result: categories, makeNewRequest } = useMakeRequest<ResponseGetAllCategories>({
+export default function Categories({ onClick }: Props) {
+    const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
         url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
     });
 
     const handleCategoriesSelected = async (evt: React.ChangeEvent<HTMLSelectElement>) => {
         console.log(evt.target.value);
-        await makeNewRequest({
-            url: `${import.meta.env.VITE_SOME_BASE_URL}/posting/getListFiltered`
-        })
+        onClick({ categorySelected: evt.target.value })
     }
 
     return (
