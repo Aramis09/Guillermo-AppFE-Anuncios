@@ -1,5 +1,5 @@
 import { useState } from "react";
-import s from "./create.module.scss";
+import s from "./formToSavePost.module.scss";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from "@cloudinary/react";
 import UploadWidget from "../../components/uploadImage/uploadImage";
@@ -25,18 +25,21 @@ interface Params {
     publicId: string;
     categoriesSelected: string[];
   }) => Promise<void>;
-
   title?: string;
-
   required?: boolean;
+  // forcedShowOtherImage?: string;
+  publicId: string;
+  setPublicId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function FormToSavePost({
   onSave,
   title = "Subir anuncio",
   required = true,
+  // forcedShowOtherImage,
+  publicId,
+  setPublicId,
 }: Params) {
-  const [publicId, setPublicId] = useState("");
   const [err, setErr] = useState<string | boolean>(false);
 
   const [categoriesSelected, setCategoriesSelected] = useState<string[]>([]);
@@ -165,7 +168,9 @@ export default function FormToSavePost({
               Tipo de contacto
             </option>
             {contacts?.data.map((ct) => (
-              <option value={ct.type}>{ct.type}</option>
+              <option key={Math.random()} value={ct.type}>
+                {ct.type}
+              </option>
             ))}
           </select>
           escriba el contacto

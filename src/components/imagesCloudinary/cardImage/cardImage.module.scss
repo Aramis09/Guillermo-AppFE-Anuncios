@@ -1,0 +1,26 @@
+.container {
+    width: 100%;
+    position: relative;
+    border-radius: 0.5rem;
+    margin: 2%;
+    img{
+      width: 100%;
+    }
+
+    .iconRemove,.iconDelete,.iconAdd{
+      position: absolute;
+      top: 10px;
+      width: 2rem;
+      cursor: pointer;
+    }
+
+    .iconDelete{
+      left: 10px;
+    }
+    .iconAdd{
+      right: 20px;
+    }
+    .iconRemove{
+      right: 100px;
+    }
+}

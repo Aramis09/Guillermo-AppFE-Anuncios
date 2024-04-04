@@ -15,14 +15,14 @@ export default function Home() {
   const [posts, setPosts] = useState<ResponseGetPosts>();
   const [categorySelected, setCategorySelected] = useState<string[]>([]);
 
+  console.log(posts, categorySelected);
+
   const { isSuccess, data: newData } = useGetPostListQuery({
     url: `/posting`,
     urlCategories: `/posting/getListFiltered`,
     page: currentPage,
     categories: categorySelected,
   });
-
-  console.log(newData, "<<<aqui");
 
   useEffect(() => {
     if (currentPage === 1 && newData?.currentPage === 1)
@@ -33,12 +33,6 @@ export default function Home() {
       newData.currentPage !== currentPage &&
       newData.currentPage > currentPage
     ) {
-      console.log(
-        `paginaReq:${newData.currentPage}`,
-        `pagina:${currentPage}`,
-        newData.data,
-        categorySelected
-      );
       setPosts(
         (prev) =>
           prev && {
@@ -50,7 +44,7 @@ export default function Home() {
   }, [newData, currentPage, isSuccess]);
 
   const hanlderMoreDataScroll = async () => {
-    if (posts?.pages === currentPage) return; //! there is not more pages to render.
+    if (posts?.pages === currentPage) return; //! there is no more pages to render.
     setLoaderStatus(true);
     setTimeout(() => {
       posts && setCurrentPage(posts.nextPage);
@@ -63,16 +57,23 @@ export default function Home() {
     categorySelected: string;
   }) => {
     setPosts(undefined);
-    setCategorySelected([categorySelected]);
+    setCategorySelected(() => [categorySelected]);
   };
-  if (!posts || !posts.data)
+
+  if (!posts)
     return (
       <>
         <Categories onClick={handlerChangeCategory} />
         Error ...
       </>
     );
-
+  if (!posts.data.length)
+    return (
+      <>
+        <Categories onClick={handlerChangeCategory} />
+        No hay anuncios para esta categoria...
+      </>
+    );
   return (
     <div className={s.container}>
       <Categories onClick={handlerChangeCategory} />

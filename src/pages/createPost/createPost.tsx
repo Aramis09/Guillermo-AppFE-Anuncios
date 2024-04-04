@@ -1,8 +1,14 @@
+import { useState } from "react";
+import s from "./createPost.module.scss";
+
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import FormToSavePost from "./formToSavePost";
+import ImagesCloudinary from "../../components/imagesCloudinary/imagesCloudinary";
 
 export default function CreatePost() {
   const { makeNewRequest } = useMakeRequest({});
+  const [publicId, setPublicId] = useState<string>("");
+
   const save = async ({
     contactType,
     contactValue,
@@ -33,7 +39,20 @@ export default function CreatePost() {
         contactType,
       },
     });
+    alert("El anuncio fue creado");
+    window.location.href = "/";
   };
 
-  return <FormToSavePost onSave={save} />;
+  return (
+    <div className={s.container}>
+      <FormToSavePost
+        onSave={save}
+        setPublicId={setPublicId}
+        publicId={publicId}
+      />
+      <div className={s.containerImages}>
+        <ImagesCloudinary setImage={setPublicId} image={publicId} />
+      </div>
+    </div>
+  );
 }

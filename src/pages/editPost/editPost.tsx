@@ -1,9 +1,13 @@
 import s from "./editPost.module.scss";
 import FormToSavePost from "../createPost/formToSavePost";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
+import ImagesCloudinary from "../../components/imagesCloudinary/imagesCloudinary";
+import { useState } from "react";
 
 export default function EditPost() {
   const { makeNewRequest } = useMakeRequest({});
+  const [publicId, setPublicId] = useState<string>("");
+
   const save = async ({
     contactType,
     contactValue,
@@ -21,8 +25,6 @@ export default function EditPost() {
     publicId: string;
     categoriesSelected: string[];
   }) => {
-    console.log(contactType);
-
     await makeNewRequest<void>({
       method: "PUT",
       url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
@@ -39,6 +41,17 @@ export default function EditPost() {
   };
 
   return (
-    <FormToSavePost onSave={save} title="Editar anuncio" required={false} />
+    <div className={s.container}>
+      <FormToSavePost
+        onSave={save}
+        title="Editar anuncio"
+        required={false}
+        setPublicId={setPublicId}
+        publicId={publicId}
+      />
+      <div className={s.containerImages} style={{ width: "50%" }}>
+        <ImagesCloudinary setImage={setPublicId} image={publicId} />
+      </div>
+    </div>
   );
 }

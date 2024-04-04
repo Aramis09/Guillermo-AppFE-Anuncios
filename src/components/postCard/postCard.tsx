@@ -79,13 +79,12 @@ export default function PostCard({ postDetail }: Props) {
       );
     }
   };
-  console.log(statusUser);
 
   return (
     <div className={styleSize}>
       <AdvancedImage cldImg={myImage} alt="image" />
       <div className={s.containerIcons}>
-        {!!iconContact ? (
+        {iconContact ? (
           <img
             src={iconContact}
             alt="contact"
@@ -96,7 +95,7 @@ export default function PostCard({ postDetail }: Props) {
           <></>
         )}
         {statusUser.acces ? (
-          <Link to="/edit">
+          <Link to="/edit" className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
         ) : (

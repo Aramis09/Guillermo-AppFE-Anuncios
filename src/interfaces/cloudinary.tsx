@@ -30,3 +30,22 @@ export interface ResultCloudinary {
   event: "display-changed" | "success";
   info: ImageData;
 }
+
+export interface GetImagesFromCloudinary {
+  images: Images;
+}
+
+export interface Images {
+  resources: ImageCloudinaryDetail[];
+  updated_at: Date;
+}
+
+export interface ImageCloudinaryDetail {
+  public_id: string;
+  version: number;
+  format: string;
+  width: number;
+  height: number;
+  type: string;
+  created_at: Date;
+}

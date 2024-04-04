@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import s from "./s.module.scss";
 
 interface Props {
-  onClickSave : (algo:any) => Promise<void> 
+  onClickSave: (algo: any) => Promise<void>;
 }
 
-export default function CreateSomething({ onClickSave }:Props) {
+export default function CreateSomething({ onClickSave }: Props) {
   const [itemsList, setItemList] = useState<string[]>([]);
 
   const handleAddItem = (evt: React.FormEvent<HTMLFormElement>) => {
@@ -15,17 +15,16 @@ export default function CreateSomething({ onClickSave }:Props) {
     const newItem = fields["item"] as string;
     setItemList((prev) => [...prev, newItem]);
     form.reset();
-    console.log(fields, "<<----");
   };
 
-const removeItemFromList = (itemToRemove:string) => {
-    setItemList(prev => prev.filter(itemIn => itemIn !== itemToRemove))
-}
+  const removeItemFromList = (itemToRemove: string) => {
+    setItemList((prev) => prev.filter((itemIn) => itemIn !== itemToRemove));
+  };
 
-const saveItems = async () => {
-  if(!itemsList.length) alert("Antes de guardar agregue algun item")
-  await onClickSave(itemsList)
-}
+  const saveItems = async () => {
+    if (!itemsList.length) alert("Antes de guardar agregue algun item");
+    await onClickSave(itemsList);
+  };
 
   return (
     <div className={s.container}>
@@ -36,7 +35,7 @@ const saveItems = async () => {
       <ul>
         {itemsList.map((item) => (
           <li key={Math.random()}>
-            {item} <button onClick={()=>removeItemFromList(item)}>x</button>
+            {item} <button onClick={() => removeItemFromList(item)}>x</button>
           </li>
         ))}
       </ul>

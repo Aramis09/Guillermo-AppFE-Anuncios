@@ -17,23 +17,22 @@
     transition: all 0.2s;
     border-radius: 0.5rem;
   }
-  .containerIcons{
-    // background-color: red;
+  .containerIcons {
     width: 100%;
     z-index: 1999;
     position: absolute;
+    bottom: 5%;
+    gap: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 0;
-    gap: 20px;
     .contact {
-      // position: absolute;
       background-color: white;
       width: 4rem;
+      border: none;
       height: 4rem;
+      margin: 0;
     }
-
   }
 }
 

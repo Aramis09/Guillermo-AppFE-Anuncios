@@ -44,7 +44,7 @@ function CloudinaryUploadWidget({ setPublicId }: Props) {
           // sources: [ "local", "url"], // restrict the upload sources to URL and local files
           // multiple: false,  //restrict upload to a single file
           // folder: "user_images", //upload files to the specified folder
-          // tags: ["users", "profile"], //add the given tags to the uploaded files
+          tags: ["anuncios"], //add the given tags to the uploaded files
           // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
           // clientAllowedFormats: ["images"], //restrict uploading to image files only
           // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
