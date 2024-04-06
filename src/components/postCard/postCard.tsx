@@ -22,12 +22,12 @@ export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
   const { statusUser } = useLogin();
-
   const cld = new Cloudinary({
     cloud: {
       cloudName: import.meta.env.VITE_SOME_CLOUD_NAME,
     },
   });
+
   useEffect(() => {
     switch (postDetail.size.size) {
       case 1:
@@ -95,7 +95,7 @@ export default function PostCard({ postDetail }: Props) {
           <></>
         )}
         {statusUser.acces ? (
-          <Link to="/edit" className={s.contact}>
+          <Link to={`/edit/${postDetail.id}`} className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
         ) : (

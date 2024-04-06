@@ -7,9 +7,9 @@ export interface BodyDataSppCart {
   idUser: string | number | null;
 }
 
-interface GetWithId {
-  id: string | number | undefined;
-}
+// interface GetWithId {
+//   id: string | number | undefined;
+// }
 
 export const postApi = createApi({
   reducerPath: "postApi",
@@ -35,15 +35,16 @@ export const postApi = createApi({
         page: number;
         urlCategories: string;
         categories: string[] | undefined;
+        section: "Main" | "Events" | "Useful%20Information";
       }
     >({
-      query: ({ url, urlCategories, page, categories }) => {
+      query: ({ url, urlCategories, page, categories, section }) => {
         if (categories?.length) {
           return `${urlCategories}?page=${[page]}&categories=${JSON.stringify(
             categories
-          )}`;
+          )}&section=${section}`;
         }
-        return `${url}?page=${page}`;
+        return `${url}?page=${page}&section=${section}`;
       },
     }),
     // getPostPage: builder.mutation({

@@ -3,12 +3,14 @@ import FormToSavePost from "../createPost/formToSavePost";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import ImagesCloudinary from "../../components/imagesCloudinary/imagesCloudinary";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function EditPost() {
   const { makeNewRequest } = useMakeRequest({});
   const [publicId, setPublicId] = useState<string>("");
+  const { id } = useParams();
 
-  const save = async ({
+  const hanlderEditPost = async ({
     contactType,
     contactValue,
     importance,
@@ -29,6 +31,7 @@ export default function EditPost() {
       method: "PUT",
       url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
       body: {
+        id,
         size,
         importance,
         section,
@@ -38,12 +41,13 @@ export default function EditPost() {
         contactType,
       },
     });
+    window.location.href = "/";
   };
 
   return (
     <div className={s.container}>
       <FormToSavePost
-        onSave={save}
+        onSave={hanlderEditPost}
         title="Editar anuncio"
         required={false}
         setPublicId={setPublicId}

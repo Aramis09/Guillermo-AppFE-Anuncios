@@ -8,20 +8,22 @@ import useLoaderManage from "../../hooks/useLoader";
 import { useGetPostListQuery } from "../../redux/services/apiPost";
 import { useEffect, useState } from "react";
 import Categories from "../../components/categories/categories";
+import { useLocation } from "react-router-dom";
+import { buildSectionName } from "./utils/buildSectionName";
 
 export default function Home() {
+  const { pathname } = useLocation();
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [posts, setPosts] = useState<ResponseGetPosts>();
   const [categorySelected, setCategorySelected] = useState<string[]>([]);
-
-  console.log(posts, categorySelected);
 
   const { isSuccess, data: newData } = useGetPostListQuery({
     url: `/posting`,
     urlCategories: `/posting/getListFiltered`,
     page: currentPage,
     categories: categorySelected,
+    section: buildSectionName(pathname),
   });
 
   useEffect(() => {
@@ -85,7 +87,7 @@ export default function Home() {
         className={s.infiniteScroll}
         endMessage={
           <p style={{ textAlign: "center" }}>
-            <b>Yay! You have seen it all</b>
+            <b>No hay mas anuncios !!</b>
           </p>
         }
       >
