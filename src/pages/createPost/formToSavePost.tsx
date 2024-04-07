@@ -173,7 +173,7 @@ export default function FormToSavePost({
               </option>
             ))}
           </select>
-          escriba el contacto
+          Escriba el contacto
           <input type="text" name="contactValue" />
         </div>
         <button type="submit" name="login">

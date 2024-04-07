@@ -1,3 +1,6 @@
 :root {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.home{
+  position: relative;
+}

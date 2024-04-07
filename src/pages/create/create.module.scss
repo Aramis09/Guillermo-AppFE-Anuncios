@@ -17,3 +17,18 @@
         line-height: 10px;
     }
 }
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+
+    .container {
+  
+        .link {
+            padding: 5%;
+            max-height: 100px;
+            background-color: #0B60B0;
+            font-size: 1rem;
+            border-radius: 0.2rem;
+        }
+    }
+
+}

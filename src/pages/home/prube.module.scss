@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  // margin-top: 100px;
   padding-block: 5%;
   .containerData {
     width: 80vw;
@@ -24,12 +23,12 @@
     justify-content: center;
     align-items: center;
     padding: 0%;
+
     .containerData {
-      width: 100%;
+      width: 95vw;
       margin-top: 0px;
       columns: 2;
       column-gap: 0px;
-      box-shadow: inset 0px 0px 100px black;
       border-radius: 0.5rem;
     }
     .infinite-scroll-component__outerdiv {

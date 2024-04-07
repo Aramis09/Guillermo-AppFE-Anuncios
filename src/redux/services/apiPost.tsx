@@ -15,6 +15,8 @@ export const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `${import.meta.env.VITE_SOME_BASE_URL}`,
+    mode: "cors",
+    credentials: "include",
     prepareHeaders: (headers) => {
       headers.set("Content-Type", "application/json");
       headers.set("auth-secret-key", `${import.meta.env.VITE_SOME_KEY_SECRET}`);

@@ -27,6 +27,7 @@ export function useMakeRequest<T>({ url, method, body }: Params) {
       method: method || "GET",
       headers: myHeaders,
       credentials: "include",
+      mode: "cors",
       body: JSON.stringify(body) || null,
     };
     return config;
@@ -49,6 +50,7 @@ export function useMakeRequest<T>({ url, method, body }: Params) {
       `${getCookie({ nameCookie: "messiEntroAJugar" }).cookiesFound || null}`
     );
     myHeaders.append("Content-Type", "application/json");
+
     myHeaders.append(
       "auth-secret-key",
       `${import.meta.env.VITE_SOME_KEY_SECRET}`
@@ -57,6 +59,7 @@ export function useMakeRequest<T>({ url, method, body }: Params) {
       method: method || "GET",
       headers: myHeaders,
       credentials: "include",
+      mode: "cors",
       body: JSON.stringify(body) || null,
     };
 

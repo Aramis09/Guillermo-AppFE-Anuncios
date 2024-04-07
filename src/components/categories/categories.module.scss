@@ -2,7 +2,7 @@
   position: fixed;
   right: 20px;
   top: 100px;
-  z-index: 10000;
+  z-index: 1000;
   border: none;
   background-color: rgb(237, 237, 237);
   padding: 5px;
@@ -12,4 +12,19 @@
   }
 }
 
-//08005550104
+@media screen and (min-width: 270px) and (max-width: 767px) {
+
+  .container {
+    width: 100%;
+    left: 0;
+    top: 35px;
+    padding: 3%;
+    text-align: center;
+    background-color: #198ffd;
+    color: rgb(252, 252, 252);
+    option {
+      background-color: rgb(232, 232, 232);
+      color: black;
+    }
+  }
+}

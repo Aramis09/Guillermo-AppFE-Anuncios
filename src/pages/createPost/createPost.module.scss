@@ -7,3 +7,10 @@
     width: 50%;
   }
 }
+
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+  .containerImages {
+    width: 100%;
+  }
+}

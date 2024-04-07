@@ -17,8 +17,13 @@ import Ex from "./pages/example/ex";
 
 function App() {
   const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
+  console.log(
+    import.meta.env.VITE_SOME_BASE_URL ===
+      "https://fp17v6p5-3001.brs.devtunnels.ms"
+  );
+
   return (
-    <>
+    <div className="home">
       <Navbar />
       <Presentation />
       {LoaderAllViewport}
@@ -42,7 +47,7 @@ function App() {
           }
         />
       </Routes>
-    </>
+    </div>
   );
 }
 

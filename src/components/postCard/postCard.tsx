@@ -13,6 +13,7 @@ import editIcon from "../../assets/icons/edit.svg";
 
 import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
+import { useChangeStylesClick } from "../../hooks/useChangeStylesClick";
 
 interface Props {
   postDetail: PostDetail;
@@ -21,6 +22,12 @@ interface Props {
 export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
+  const { style, changeStyles } = useChangeStylesClick({
+    styles: s,
+    first: "normalImage",
+    second: "coverImage",
+  });
+
   const { statusUser } = useLogin();
   const cld = new Cloudinary({
     cloud: {
@@ -82,7 +89,12 @@ export default function PostCard({ postDetail }: Props) {
 
   return (
     <div className={styleSize}>
-      <AdvancedImage cldImg={myImage} alt="image" />
+      <div
+        className={style}
+        onClick={window.innerWidth < 768 ? changeStyles : undefined}
+      >
+        <AdvancedImage cldImg={myImage} alt="image" />
+      </div>
       <div className={s.containerIcons}>
         {iconContact ? (
           <img
