@@ -9,9 +9,28 @@ interface Props {
 }
 
 export default function Categories({ onClick }: Props) {
-  const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
-    url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
-  });
+  const { result: categories, setResult } =
+    useMakeRequest<ResponseGetAllCategories>({
+      url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
+    });
+  if (!categories)
+    setResult({
+      message: "it was created",
+      data: [
+        {
+          id: 1,
+          name: "ferreteria",
+        },
+        {
+          id: 2,
+          name: "carpinteria",
+        },
+        {
+          id: 3,
+          name: "tienda",
+        },
+      ],
+    });
 
   const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({
     turnOnInitSinglePage: true,

@@ -39,8 +39,8 @@ export default function CreatePost() {
         contactType,
       },
     });
-    alert("El anuncio fue creado");
-    window.location.href = "/";
+    // alert("El anuncio fue creado");
+    // window.location.href = "/";
   };
 
   return (

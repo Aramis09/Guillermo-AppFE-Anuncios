@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import Categories from "../../components/categories/categories";
 import { useLocation } from "react-router-dom";
 import { buildSectionName } from "./utils/buildSectionName";
+import { algo } from "./algo";
 
 export default function Home() {
   const { pathname } = useLocation();
@@ -26,24 +27,26 @@ export default function Home() {
     section: buildSectionName(pathname),
   });
 
-  useEffect(() => {
-    if (currentPage === 1 && newData?.currentPage === 1)
-      return setPosts(newData);
-    if (
-      newData &&
-      newData.data.length !== 0 &&
-      newData.currentPage !== currentPage &&
-      newData.currentPage > currentPage
-    ) {
-      setPosts(
-        (prev) =>
-          prev && {
-            ...newData,
-            data: [...prev.data, ...newData.data],
-          }
-      );
-    }
-  }, [newData, currentPage, isSuccess]);
+  if (!posts) setPosts(algo);
+
+  // useEffect(() => {
+  //   if (currentPage === 1 && newData?.currentPage === 1)
+  //     return setPosts(newData);
+  //   if (
+  //     newData &&
+  //     newData.data.length !== 0 &&
+  //     newData.currentPage !== currentPage &&
+  //     newData.currentPage > currentPage
+  //   ) {
+  //     setPosts(
+  //       (prev) =>
+  //         prev && {
+  //           ...newData,
+  //           data: [...prev.data, ...newData.data],
+  //         }
+  //     );
+  //   }
+  // }, [newData, currentPage, isSuccess]);
 
   const hanlderMoreDataScroll = async () => {
     if (posts?.pages === currentPage) return; //! there is no more pages to render.

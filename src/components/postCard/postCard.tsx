@@ -22,11 +22,6 @@ interface Props {
 export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
-  const { style, changeStyles } = useChangeStylesClick({
-    styles: s,
-    first: "normalImage",
-    second: "coverImage",
-  });
 
   const { statusUser } = useLogin();
   const cld = new Cloudinary({
@@ -89,12 +84,7 @@ export default function PostCard({ postDetail }: Props) {
 
   return (
     <div className={styleSize}>
-      <div
-        className={style}
-        onClick={window.innerWidth < 768 ? changeStyles : undefined}
-      >
-        <AdvancedImage cldImg={myImage} alt="image" />
-      </div>
+      <AdvancedImage cldImg={myImage} alt="image" />
       <div className={s.containerIcons}>
         {iconContact ? (
           <img

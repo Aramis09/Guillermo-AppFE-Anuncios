@@ -15,7 +15,7 @@
   width: 100%;
   img {
     transition: all 0.2s;
-    border-radius: 0.5rem;
+    border-radius: 0.2rem;
   }
   .containerIcons {
     width: 100%;
@@ -210,7 +210,7 @@ img:hover {
     column-span: all;
     width: 100%;
     margin-block: 5px;
-
+    padding: 5%;
     img {
       width: 100%;
     }
@@ -244,5 +244,6 @@ img:hover {
   .size3:hover,
   .siz4:hover,img {
     transform: scale(1);
+    z-index: 2000;
   }
 }
