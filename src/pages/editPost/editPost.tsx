@@ -18,6 +18,7 @@ export default function EditPost() {
     size,
     categoriesSelected,
     publicId,
+    owner,
   }: {
     size: string;
     importance: string;
@@ -26,6 +27,7 @@ export default function EditPost() {
     contactType: string;
     publicId: string;
     categoriesSelected: string[];
+    owner: string;
   }) => {
     await makeNewRequest<void>({
       method: "PUT",
@@ -39,6 +41,7 @@ export default function EditPost() {
         categories: categoriesSelected,
         contactValue,
         contactType,
+        owner,
       },
     });
     window.location.href = "/";

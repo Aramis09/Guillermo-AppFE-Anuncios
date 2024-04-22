@@ -17,6 +17,7 @@ export default function CreatePost() {
     size,
     categoriesSelected,
     publicId,
+    owner,
   }: {
     size: string;
     importance: string;
@@ -25,6 +26,7 @@ export default function CreatePost() {
     contactType: string;
     publicId: string;
     categoriesSelected: string[];
+    owner: string;
   }) => {
     await makeNewRequest<void>({
       method: "POST",
@@ -37,6 +39,7 @@ export default function CreatePost() {
         categories: categoriesSelected,
         contactValue,
         contactType,
+        owner,
       },
     });
     // alert("El anuncio fue creado");

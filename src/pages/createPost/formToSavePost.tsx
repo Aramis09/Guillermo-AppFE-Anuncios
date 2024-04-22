@@ -16,6 +16,7 @@ interface Params {
     importance,
     section,
     size,
+    owner,
   }: {
     size: string;
     importance: string;
@@ -24,6 +25,7 @@ interface Params {
     contactType: string;
     publicId: string;
     categoriesSelected: string[];
+    owner: string;
   }) => Promise<void>;
   title?: string;
   required?: boolean;
@@ -100,6 +102,8 @@ export default function FormToSavePost({
     const section = fields["section"] as string;
     const contactValue = fields["contactValue"] as string;
     const contactType = fields["contactType"] as string;
+    const owner = fields["owner"] as string;
+
     await onSave({
       contactType,
       contactValue,
@@ -108,6 +112,7 @@ export default function FormToSavePost({
       size,
       categoriesSelected,
       publicId,
+      owner,
     });
   };
 
@@ -117,6 +122,7 @@ export default function FormToSavePost({
         <h4>{title}</h4>
         <UploadWidget setPublicId={setPublicId} />
         <AdvancedImage cldImg={myImage} />
+        <input type="text" placeholder="Nombre del cliente" name="owner" />
         <select name="size" id="size" required={required}>
           <option value="" disabled selected>
             Tamaño

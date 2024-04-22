@@ -14,7 +14,7 @@
   .containerText {
     position: absolute;
     left: 0%;
-    top: 10%;
+    top: 200px;
     color: white;
     padding-inline: 10%;
     display: flex;
@@ -25,7 +25,13 @@
       color: rgb(255, 223, 18);
     }
     h2 {
-      font-size: 3rem;
+      font-size: 3.5rem;
+    }
+    p{
+      font-size: 1.8rem;
+      background-color: rgba(0, 0, 0, 0.433);
+      padding: 1rem;
+      border-radius: 0.2rem;
     }
     button,.button {
       width: 20%;
