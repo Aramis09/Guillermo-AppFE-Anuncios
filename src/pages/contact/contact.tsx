@@ -1,9 +1,19 @@
-import s from './contact.module.scss'
+import s from "./contact.module.scss";
 
 export default function Contact() {
   return (
     <div className={s.container}>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdq4xXleOhp3w4gqHshjy_qaTOXTPDupb5CnTEVChi5a7h5eQ/viewform?embedded=true" width="640" height="856" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+      <iframe
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdq4xXleOhp3w4gqHshjy_qaTOXTPDupb5CnTEVChi5a7h5eQ/viewform?embedded=true"
+        width="640"
+        height="856"
+        // @ts-expect-error  This is external feature and i dont control of this
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+      >
+        Cargando…
+      </iframe>
     </div>
-  )
+  );
 }

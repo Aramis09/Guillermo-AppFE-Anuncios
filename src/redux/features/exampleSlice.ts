@@ -8,10 +8,10 @@ export const exampleSlice = createSlice({
   name: 'CounterExample',
   initialState,
   reducers: {
-    increment: (state, action) => { //!actions to change global state, we can use this on buttons or anything 
+    increment: (state) => { //!actions to change global state, we can use this on buttons or anything 
       state.counter = state.counter + 1
     },
-    decrement: (state, action) => { //!actions to change global state, we can use this on buttons or anything  
+    decrement: (state) => { //!actions to change global state, we can use this on buttons or anything  
       state.counter = state.counter - 1
     },
   }
