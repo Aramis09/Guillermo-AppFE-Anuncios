@@ -7,10 +7,6 @@ export interface BodyDataSppCart {
   idUser: string | number | null;
 }
 
-// interface GetWithId {
-//   id: string | number | undefined;
-// }
-
 export const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({
@@ -49,16 +45,22 @@ export const postApi = createApi({
         return `${url}?page=${page}&section=${section}`;
       },
     }),
-    // getPostPage: builder.mutation({
-    //     query: ({ page }) => ({
-    //         url: `/posting?page=${page}`,
-    //         method: "get",
-    //     })
-    // })
+    searchPostByOwner: builder.query<
+      ResponseGetPosts,
+      {
+        owner: string;
+      }
+    >({
+      query: ({ owner }) => ({
+        url: `/posting/getPostByOwner?owner=${owner}`,
+        method: "get",
+      }),
+    }),
   }),
 });
 
 export const {
   useGetPostListQuery,
+  useSearchPostByOwnerQuery,
   // useGetPostPageMutation
 } = postApi;

@@ -16,7 +16,7 @@
 .loader::before{
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(0deg,#f0c,#80f);
+  background-image: linear-gradient(0deg,rgb(42, 123, 245),rgb(240, 240, 240));
 }
 
 .loader::after{

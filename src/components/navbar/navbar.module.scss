@@ -12,7 +12,7 @@
   padding-block: 1rem;
   z-index: 2000;
   .links,
-  .linkUser,
+  .linkSearch,
   .linkAdmin {
     color: white;
     display: flex;
@@ -30,7 +30,7 @@
       font-size: 1rem;
     }
   }
-  .linkUser {
+  .linkSearch {
     position: absolute;
     right: 50px;
   }
@@ -44,7 +44,12 @@
   }
 }
 
-@media screen and (min-width: 270px) and (max-width: 767px) {
+// @media screen and (min-width: 767px) and (max-width: 1024px) {
+  
+// }
+
+
+@media screen and (min-width: 270px) and (max-width: 1024px) {
 
   .container,.containerHiden {
     width: 100%;
@@ -55,7 +60,7 @@
     background-color: #0b60b0;
     padding-block: 0rem;
     transition: all  0.5s;
-    .linkAdmin {
+    .linkAdmin,.linkSearch {
       position: static;
     }
 
@@ -75,9 +80,10 @@
     color: white;
     cursor: pointer;
     position: fixed;
-    z-index: 3000;
+    z-index: 4000;
     top: 0;
     left: 0;
     // display: block;
   }
+
 }

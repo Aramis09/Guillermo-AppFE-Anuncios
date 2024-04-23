@@ -13,7 +13,6 @@ import editIcon from "../../assets/icons/edit.svg";
 
 import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
-import { useChangeStylesClick } from "../../hooks/useChangeStylesClick";
 
 interface Props {
   postDetail: PostDetail;

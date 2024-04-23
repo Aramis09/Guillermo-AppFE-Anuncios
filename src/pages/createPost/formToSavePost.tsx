@@ -31,6 +31,7 @@ interface Params {
   }) => Promise<void>;
   title?: string;
   required?: boolean;
+  titleButton?: string;
   // forcedShowOtherImage?: string;
   publicId: string;
   setPublicId: React.Dispatch<React.SetStateAction<string>>;
@@ -39,6 +40,7 @@ interface Params {
 export default function FormToSavePost({
   onSave,
   title = "Subir anuncio",
+  titleButton = "Crear",
   required = true,
   // forcedShowOtherImage,
   publicId,
@@ -205,7 +207,7 @@ export default function FormToSavePost({
           <input type="date" name="expire" required={required} />
         </div>
         <button type="submit" name="login">
-          Crear
+          {titleButton}
         </button>
         <p className={s.err}>{err ? err : ""}</p>
       </form>

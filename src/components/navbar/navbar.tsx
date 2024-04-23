@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import iconMain from "../../assets/icons/main.svg";
 import iconEvents from "../../assets/icons/evets.svg";
 import iconNews from "../../assets/icons/news.svg";
-// import iconUser from "../../assets/icons/user.svg";
+import iconSearch from "../../assets/icons/search.svg";
 import iconPlus from "../../assets/icons/plus.svg";
 
 import s from "./navbar.module.scss";
@@ -52,15 +52,19 @@ export default function Navbar() {
           <img src={iconEvents} alt="eventsImg" />
           <p className={s.textHiden}>Eventos</p>
         </Link>
-        {/* <Link
-        to={!statusUser.acces ? "/login" : "/" + location}
-        className={s.linkUser}
-        style={styleSelected("/login", location)}
-        onClick={logOutUser}
-      >
-        <img src={iconUser} alt="eventsImg" />
-        <p className={s.textHiden}>{!statusUser.acces ? "Login" : "Log Out"}</p>
-      </Link> */}
+        {statusUser.acces ? (
+          <Link
+            to="/search"
+            className={s.linkSearch}
+            onClick={changeStyles}
+            style={styleSelected("/search", location)}
+          >
+            <img src={iconSearch} alt="eventsImg" />
+            <p className={s.textHiden}>Buscar anuncio</p>
+          </Link>
+        ) : (
+          <></>
+        )}
 
         <Link
           to="/create"

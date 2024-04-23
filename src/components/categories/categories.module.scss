@@ -2,17 +2,18 @@
   position: fixed;
   right: 20px;
   top: 100px;
-  z-index: 4000;
+  z-index: 1500;
   border: none;
   background-color: rgb(237, 237, 237);
   padding: 5px;
   cursor: pointer;
   option {
     cursor: pointer;
+    
   }
 }
 
-@media screen and (min-width: 270px) and (max-width: 767px) {
+@media screen and (min-width: 270px) and (max-width: 1024px) {
 
   .container {
     width: 100%;

@@ -13,7 +13,7 @@ import CreateSection from "./pages/createSection/createSection";
 import CreatePost from "./pages/createPost/createPost";
 import Contact from "./pages/contact/contact";
 import EditPost from "./pages/editPost/editPost";
-import Ex from "./pages/example/ex";
+import SearchPost from "./pages/search/searchPost";
 
 function App() {
   const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
@@ -38,7 +38,7 @@ function App() {
         <Route path="/events" element={<Home />} />
         <Route path="/useful-info" element={<Home />} />
         <Route path="/edit/:id" element={<EditPost />} />
-        <Route path="/ex" element={<Ex />} />
+        <Route path="/search" element={<SearchPost />} />
 
         <Route
           path="/*"

@@ -40,3 +40,38 @@
     }
   }
 }
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10%;
+    background-color: white;
+    .formLogin{
+      display: flex;
+      row-gap: 20px;
+      border-radius: 0.2rem;
+      padding: 5%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #0B60B0;
+      
+
+      h4 {
+        font-size: 1.2rem;
+    
+      }
+      .error {
+        color: rgb(255, 255, 255);
+      }
+      button,input {
+        border-radius: 0.2rem;
+      }
+    }
+  }
+}

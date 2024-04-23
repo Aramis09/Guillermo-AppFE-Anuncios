@@ -63,6 +63,7 @@ export default function EditPost() {
         required={false}
         setPublicId={setPublicId}
         publicId={publicId}
+        titleButton="Editar"
       />
       <div>
         <p>Nombre Cliente: {postDetail?.data.owner}</p>
