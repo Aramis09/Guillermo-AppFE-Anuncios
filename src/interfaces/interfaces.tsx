@@ -6,6 +6,9 @@ export interface ResponseGetPosts {
   currentPage: number;
   data: PostDetail[];
 }
+export interface ResponseGetDetailPost {
+  data: PostDetailIncludeMoreData;
+}
 
 export interface PostDetail {
   id: number;
@@ -21,8 +24,18 @@ export interface PostDetail {
   contactValue: string;
   contactType: "whatsapp" | "personal-page" | "direct-phone" | "none";
   created_at: string;
+  owner: string;
+  expire: string;
 }
 
+export interface PostDetailIncludeMoreData extends PostDetail {
+  categories: {
+    id: number;
+    name: string;
+  }[];
+  importance: ImportanceClass;
+  size: Size;
+}
 export interface ImportanceClass {
   id: number;
   importance: ImportanceEnum;

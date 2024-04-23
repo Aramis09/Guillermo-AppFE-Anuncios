@@ -9,8 +9,7 @@
   .formLogin {
     padding: 5%;
     border-radius: 0.2rem;
-    box-shadow: inset 0px 0px 100px black;
-    background-color: rgb(206, 206, 206);
+    background-color: rgb(255, 255, 255);
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -31,14 +30,16 @@
     option,
     input,
     button {
-      border: none;
+      border: 1px solid rgba(205, 205, 205, 0.683);
       margin-block: 5px;
       padding: 1rem;
       border-radius: 0.5rem;
       cursor: pointer;
       width: 100%;
       text-align: center;
+      color: rgb(112, 112, 112);
     }
+  
     select,input {
       width: 100%;
     }
@@ -52,6 +53,10 @@
       color: red;
       font-weight: 400;
     }
+  }
+
+  .divsContainers {
+    width: 100%;
   }
 }
 

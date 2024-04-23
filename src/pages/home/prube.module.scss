@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   padding-block: 5%;
+
   .containerData {
     width: 80vw;
     padding: 5%;
@@ -12,8 +13,11 @@
     columns: 2;
     column-gap: 10px;
     border-radius: 0.2rem;
-    background-color: rgb(237, 237, 237);
+    background-color: rgb(255, 255, 255);
+    border: solid 1rem rgb(121, 121, 121);
+    background-repeat: repeat;
   }
+
 }
 
 @media screen and (min-width: 270px) and (max-width: 767px) {

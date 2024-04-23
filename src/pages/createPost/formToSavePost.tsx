@@ -17,6 +17,7 @@ interface Params {
     section,
     size,
     owner,
+    expire,
   }: {
     size: string;
     importance: string;
@@ -26,6 +27,7 @@ interface Params {
     publicId: string;
     categoriesSelected: string[];
     owner: string;
+    expire: string;
   }) => Promise<void>;
   title?: string;
   required?: boolean;
@@ -103,6 +105,16 @@ export default function FormToSavePost({
     const contactValue = fields["contactValue"] as string;
     const contactType = fields["contactType"] as string;
     const owner = fields["owner"] as string;
+    const expireWrongFormat = fields["expire"] as string;
+    const expire = expireWrongFormat
+      .split("")
+      .map((e) => {
+        if (e === "-") {
+          return "/";
+        }
+        return e;
+      })
+      .join("");
 
     await onSave({
       contactType,
@@ -113,6 +125,7 @@ export default function FormToSavePost({
       categoriesSelected,
       publicId,
       owner,
+      expire: removeZerosDate(expire),
     });
   };
 
@@ -122,7 +135,12 @@ export default function FormToSavePost({
         <h4>{title}</h4>
         <UploadWidget setPublicId={setPublicId} />
         <AdvancedImage cldImg={myImage} />
-        <input type="text" placeholder="Nombre del cliente" name="owner" />
+        <input
+          type="text"
+          placeholder="Nombre del cliente"
+          name="owner"
+          required={required}
+        />
         <select name="size" id="size" required={required}>
           <option value="" disabled selected>
             Tamaño
@@ -167,7 +185,7 @@ export default function FormToSavePost({
             </option>
           ))}
         </select>
-        <div>
+        <div className={s.divsContainers}>
           Define un medio de contacto
           <select name="contactType" id="contactType">
             <option value="" disabled selected>
@@ -182,6 +200,10 @@ export default function FormToSavePost({
           Escriba el contacto
           <input type="text" name="contactValue" />
         </div>
+        <div className={s.divsContainers}>
+          Defina fecha de expiracion
+          <input type="date" name="expire" required={required} />
+        </div>
         <button type="submit" name="login">
           Crear
         </button>
@@ -189,4 +211,18 @@ export default function FormToSavePost({
       </form>
     </section>
   );
+}
+
+function removeZerosDate(date: string) {
+  // Dividir la fecha en partes
+  const dateArr = date.split("/");
+
+  // Iterar sobre cada parte y eliminar los ceros si están presentes
+  for (let i = 0; i < dateArr.length; i++) {
+    // Convertir la parte en número para eliminar el cero delante
+    dateArr[i] = parseInt(dateArr[i], 10).toString();
+  }
+
+  // Unir las partes de la fecha nuevamente
+  return dateArr.join("/");
 }
