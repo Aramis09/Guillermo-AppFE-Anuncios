@@ -1,7 +1,6 @@
 import s from "./categories.module.scss";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetAllCategories } from "../../interfaces/interfaces";
-import useLoaderManage from "../../hooks/useLoader";
 
 interface Props {
   positionCoordinates?: string;
@@ -9,37 +8,15 @@ interface Props {
 }
 
 export default function Categories({ onClick }: Props) {
-  const { result: categories, setResult } =
-    useMakeRequest<ResponseGetAllCategories>({
-      url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
-    });
-  if (!categories)
-    setResult({
-      message: "it was created",
-      data: [
-        {
-          id: 1,
-          name: "ferreteria",
-        },
-        {
-          id: 2,
-          name: "carpinteria",
-        },
-        {
-          id: 3,
-          name: "tienda",
-        },
-      ],
-    });
-
-  const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({
-    turnOnInitSinglePage: true,
+  const categorySelectedFound = localStorage.getItem("categorySelected");
+  const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
+    url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
   });
 
   const handleCategoriesSelected = async (
     evt: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setLoaderStatus(true);
+    localStorage.setItem("categorySelected", evt.target.value);
     onClick({ categorySelected: evt.target.value });
   };
 
@@ -57,12 +34,22 @@ export default function Categories({ onClick }: Props) {
         </option>
         <option value="delete">Borrar filtro</option>
         {categories?.data.map((category) => (
-          <option key={category.id} value={category.name}>
+          <option
+            key={category.id}
+            value={category.name}
+            style={
+              categorySelectedFound === category.name
+                ? {
+                    backgroundColor: "#136fc6",
+                    color: "white",
+                  }
+                : undefined
+            }
+          >
             {category.name}
           </option>
         ))}
       </select>
-      {LoaderAllViewport}
     </>
   );
 }
