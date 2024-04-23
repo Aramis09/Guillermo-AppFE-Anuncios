@@ -55,9 +55,9 @@ export default function Home() {
   const hanlderMoreDataScroll = async () => {
     if (posts?.pages === currentPage) return; //! there is no more pages to render.
     // setLoaderStatus(true);
-    setTimeout(() => {
-      posts && setCurrentPage(posts.nextPage);
-    }, 210);
+    posts && setCurrentPage(posts.nextPage);
+    // setTimeout(() => {
+    // }, 210);
   };
 
   const handlerChangeCategory = ({
@@ -65,6 +65,7 @@ export default function Home() {
   }: {
     categorySelected: string;
   }) => {
+    setLoaderStatus(true);
     setPosts(undefined);
     if (categorySelected === "delete") {
       return setCategorySelected(() => []);
@@ -82,6 +83,7 @@ export default function Home() {
     return (
       <>
         <Categories onClick={handlerChangeCategory} />
+        {LoaderAllViewport}
         Error ...
       </>
     );
@@ -89,6 +91,7 @@ export default function Home() {
     return (
       <>
         <Categories onClick={handlerChangeCategory} />
+        {LoaderAllViewport}
         No hay anuncios para esta categoria...
       </>
     );
