@@ -33,9 +33,16 @@ body {
   margin: 0;
   
 }
+
+@font-face {
+  font-family: 'Quicksand-Regular'; 
+  src: url('./assets/font/Quicksand-Bold.ttf') format('truetype');
+ 
+}
+
 #root {
   background-color: rgb(228, 228, 228);
-
+  font-family:Quicksand-Regular ;
 }
 /**
  * Render the `main` element consistently in IE.
