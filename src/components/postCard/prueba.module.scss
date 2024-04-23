@@ -252,15 +252,11 @@
   .size1:hover,
   .size2:hover,
   .size3:hover,
-  .siz4:hover,img {
+  img {
     transform: scale(1);
     z-index: 2000;
-  }
-  .size1:active,
-  .size2:active,
-  .size3:active {
     transform: scale(1.2);
     background-color: rgb(255, 255, 255);
-    z-index: 1000;
-  } 
+  }
+
 }

@@ -13,12 +13,19 @@ import { buildSectionName } from "./utils/buildSectionName";
 
 export default function Home() {
   const { pathname } = useLocation();
-  const { setLoaderStatus, LoaderAllViewport } = useLoaderManage({});
+  const { setLoaderStatus, loaderStatus, LoaderAllViewport } = useLoaderManage(
+    {}
+  );
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [posts, setPosts] = useState<ResponseGetPosts>();
   const [categorySelected, setCategorySelected] = useState<string[]>([]);
 
-  const { isSuccess, data: newData } = useGetPostListQuery({
+  const {
+    isSuccess,
+    data: newData,
+    isFetching,
+    isLoading,
+  } = useGetPostListQuery({
     url: `/posting`,
     urlCategories: `/posting/getListFiltered`,
     page: currentPage,
@@ -47,7 +54,7 @@ export default function Home() {
 
   const hanlderMoreDataScroll = async () => {
     if (posts?.pages === currentPage) return; //! there is no more pages to render.
-    setLoaderStatus(true);
+    // setLoaderStatus(true);
     setTimeout(() => {
       posts && setCurrentPage(posts.nextPage);
     }, 210);
@@ -64,6 +71,12 @@ export default function Home() {
     }
     setCategorySelected(() => [categorySelected]);
   };
+
+  if (isFetching || isLoading) {
+    if (!loaderStatus) {
+      setLoaderStatus(true);
+    }
+  }
 
   if (!posts)
     return (
