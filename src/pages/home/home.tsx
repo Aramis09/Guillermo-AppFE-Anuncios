@@ -66,10 +66,10 @@ export default function Home() {
     categorySelected: string;
   }) => {
     setLoaderStatus(true);
-    setPosts(undefined);
     if (categorySelected === "delete") {
       return setCategorySelected(() => []);
     }
+    setPosts(undefined);
     setCategorySelected(() => [categorySelected]);
   };
 

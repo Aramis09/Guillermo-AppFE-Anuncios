@@ -32,7 +32,7 @@ export default function Categories({ onClick }: Props) {
         <option value="" disabled selected>
           Elija una categoria
         </option>
-        <option value="delete">Borrar filtro</option>
+        <option value="delete">Sin filtro</option>
         {categories?.data.map((category) => (
           <option
             key={category.id}

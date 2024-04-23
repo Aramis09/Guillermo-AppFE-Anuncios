@@ -16,11 +16,11 @@ export function LoaderAllPage({
 
   useEffect(() => {
     if (status) {
-      setStyles({ opacity: 1, zIndex: 1999, transition: "all 0.2s" });
+      setStyles({ opacity: 1, zIndex: 1999, transition: "all 0.1s" });
       setTimeout(() => {
-        setStyles({ opacity: 0, zIndex: 0, transition: "all 0.2s" });
+        setStyles({ opacity: 0, zIndex: 0, transition: "all 0.1s" });
         setStatus(false);
-      }, 1000);
+      }, 500);
     }
   }, [status, setStatus]);
 
@@ -31,9 +31,10 @@ export function LoaderAllPage({
   );
 }
 
-
 export function StaticLoader() {
-  return <div className={s.loaderAllPage} style={{ opacity: 1, zIndex: 1999 }}>
-    <Loader />
-  </div>
+  return (
+    <div className={s.loaderAllPage} style={{ opacity: 1, zIndex: 1999 }}>
+      <Loader />
+    </div>
+  );
 }
