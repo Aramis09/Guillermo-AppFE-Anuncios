@@ -5,10 +5,19 @@
 .size5 {
   position: relative;
   display: flex;
+  flex-direction: column; //!esto modifique ahora 21/04
+  justify-content: center;//!esto modifique ahora 21/04
+  align-items: center;//!esto modifique ahora 21/04
   padding: 0;
   transition: all 0.2s;
   cursor: pointer;
-  margin: 10px;
+  margin: 2rem; //!esto modifique ahora 21/04
+  border-radius: 0.2rem; //!esto modifique ahora 21/04
+  background-color: rgb(255, 255, 255);
+  border: solid 0.5rem rgb(206, 206, 206); //!esto modifique ahora 21/04
+  overflow: hidden; //!esto modifique ahora 21/04
+  padding-top: 1rem;
+  gap: 10px;
   h3 {
     font-size: 3rem;
   }
@@ -19,19 +28,19 @@
   }
   .containerIcons {
     width: 100%;
-    z-index: 1999;
-    position: absolute;
+    position: static; //!esto modifique ahora 21/04
     bottom: 5%;
     gap: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgb(0, 0, 0);
+    padding: 1rem;
     .contact {
-      background-color: white;
       width: 4rem;
+      margin: 0;
       border: none;
       height: 4rem;
-      margin: 0;
     }
   }
 }
@@ -42,10 +51,9 @@
   position: relative;
   display: flex;
   justify-content: center;
-  z-index: 500;
-  img {
-    border: solid 10px rgb(206, 206, 206);
-  }
+  // img {
+  //   border: solid 10px rgb(206, 206, 206);
+  // }
 }
 .size2,
 .size3,
@@ -90,16 +98,12 @@
 
 .size1:hover,
 .size2:hover,
-.size3:hover,
-img:hover {
+.size3:hover {
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0);
-  img {
-    transform: scale(120%);
-  }
-  .contact {
-    // transform: scale(110%);
-  }
+  // img {
+  //   transform: scale(120%);
+  // }
+    transform: scale(110%);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1770px) {
@@ -109,7 +113,6 @@ img:hover {
   .size4,
   .size5 {
     margin: 5px;
-    padding: 0%;
     img {
       border: none;
     }
