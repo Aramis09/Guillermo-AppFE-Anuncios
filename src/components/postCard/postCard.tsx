@@ -11,8 +11,8 @@ import webIcon from "../../assets/icons/web.svg";
 import linkIcon from "../../assets/icons/web.svg";
 import editIcon from "../../assets/icons/edit.svg";
 
-import useLogin from "../../hooks/useLogin";
 import { Link } from "react-router-dom";
+import { useContextAuth } from "../../contexts/hooks/useContextAuth";
 
 interface Props {
   postDetail: PostDetail;
@@ -22,8 +22,8 @@ export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
   const [slowlyShow, setSlowlyShow] = useState(postDetail.slowly);
-
-  const { statusUser } = useLogin();
+  const contextAuth = useContextAuth();
+  // const { statusUser } = useLogin();
   const cld = new Cloudinary({
     cloud: {
       cloudName: import.meta.env.VITE_SOME_CLOUD_NAME,
@@ -112,7 +112,7 @@ export default function PostCard({ postDetail }: Props) {
         ) : (
           <></>
         )}
-        {statusUser.acces ? ( //!Esto me esta matando el rendimiento
+        {contextAuth?.statusUser.acces ? ( //!Esto me esta matando el rendimiento
           <Link to={`/edit/${postDetail.id}`} className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>

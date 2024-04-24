@@ -19,6 +19,7 @@ import { useContextLoader } from "./contexts/hooks/useContextLoader";
 function App() {
   // const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
   const contextLoader = useContextLoader();
+
   return (
     <div className="home">
       <Navbar />

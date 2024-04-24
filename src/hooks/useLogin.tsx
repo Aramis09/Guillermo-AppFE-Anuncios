@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useMakeRequest } from "./useMakeRequest";
 import { deleteCookie } from "../utils/cookies";
-interface RespVeriyToken {
+export interface RespVeriyToken {
   error: string;
   acces: boolean;
 }
 
-interface RespMakeLogin {
+export interface RespMakeLogin {
   user: string;
   validPassword: boolean;
   token: "";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./s.module.scss";
 
 interface Props {
-  onClickSave: (algo: unknown) => Promise<void>;
+  onClickSave: (listItems: string[]) => Promise<void>;
 }
 
 export default function CreateSomething({ onClickSave }: Props) {
