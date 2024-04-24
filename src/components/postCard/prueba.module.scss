@@ -99,10 +99,8 @@
 .size1:hover,
 .size2:hover,
 .size3:hover {
-  z-index: 1000;
-  // img {
-  //   transform: scale(120%);
-  // }
+  z-index: 2000;
+
     transform: scale(110%);
 }
 
@@ -152,20 +150,14 @@
     }
   }
 
+
   .size1:hover,
   .size2:hover,
-  .size3:hover {
-    transform: scale(1);
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0);
+  .size3:hover,
+  img {
+    z-index: 2000;
+    transform: scale(1.5);
   }
-  .size1:active,
-  .size2:active,
-  .size3:active {
-    transform: scale(1.2);
-    background-color: rgb(255, 255, 255);
-    z-index: 1000;
-  } 
 }
 
 @media screen and (min-width: 270px) and (max-width: 767px) {
@@ -184,6 +176,8 @@
     border-radius: 0.2rem;
     margin: 0px;
     margin-block: 5px;
+    border: solid 0.2rem rgb(206, 206, 206); //!esto modifique ahora 21/04
+
     img {
       border: none;
     }
@@ -251,11 +245,10 @@
 
   .size1:hover,
   .size2:hover,
-  .size3:hover
-   {
+  .size3:hover,
+  img {
     z-index: 2000;
-    transform: scale(1.2);
-    background-color: rgb(255, 255, 255);
+    transform: scale(1.5);
   }
 
 }
