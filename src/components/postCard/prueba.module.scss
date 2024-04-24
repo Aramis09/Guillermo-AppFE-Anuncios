@@ -25,6 +25,7 @@
   img {
     transition: all 0.2s;
     border-radius: 0.2rem;
+
   }
   .containerIcons {
     width: 100%;
@@ -51,9 +52,7 @@
   position: relative;
   display: flex;
   justify-content: center;
-  // img {
-  //   border: solid 10px rgb(206, 206, 206);
-  // }
+
 }
 .size2,
 .size3,
@@ -99,9 +98,8 @@
 .size1:hover,
 .size2:hover,
 .size3:hover {
-  z-index: 2000;
-
-    transform: scale(110%);
+  z-index: 1000;
+  transform: scale(110%);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1770px) {
@@ -113,6 +111,11 @@
     margin: 5px;
     img {
       border: none;
+      transform: scale(1.4);
+    }
+    .contact {
+      transform: scale(0.8);
+
     }
   }
 
@@ -153,10 +156,9 @@
 
   .size1:hover,
   .size2:hover,
-  .size3:hover,
-  img {
-    z-index: 2000;
-    transform: scale(1.5);
+  .size3:hover{
+    z-index: 1000;
+    transform: scale(1.2);
   }
 }
 
@@ -180,11 +182,13 @@
 
     img {
       border: none;
+      transform: scale(1.4);
     }
     .containerIcons {
       .contact {
         width: 2.5rem;
         height: 2.5rem;
+        transform: scale(1);
       }
   
     }
@@ -245,10 +249,9 @@
 
   .size1:hover,
   .size2:hover,
-  .size3:hover,
-  img {
+  .size3:hover {
     z-index: 2000;
-    transform: scale(1.5);
+    transform: scale(1.2);
   }
 
 }
