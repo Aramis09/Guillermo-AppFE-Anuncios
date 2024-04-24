@@ -6,6 +6,18 @@
   /* border: solid 2px red; */
 }
 
+
+*::-webkit-scrollbar{
+  background: rgba(204, 168, 8, 0);
+  display: none;
+  
+}
+
+*::-webkit-scrollbar-thumb{
+  background-image: linear-gradient(to bottom right, rgb(137, 28, 167), rgb(15, 15, 86));
+  border-radius: 5rem;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document

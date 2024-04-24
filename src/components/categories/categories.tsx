@@ -1,6 +1,7 @@
 import s from "./categories.module.scss";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetAllCategories } from "../../interfaces/interfaces";
+import { useEffect } from "react";
 
 interface Props {
   positionCoordinates?: string;
@@ -20,6 +21,12 @@ export default function Categories({ onClick }: Props) {
     onClick({ categorySelected: evt.target.value });
   };
 
+  useEffect(() => {
+    //!Borra lo guardado en el localStorage para que cuando el usuario salga esto se borre.
+    return () => {
+      localStorage.removeItem("categorySelected");
+    };
+  }, []);
   return (
     <>
       <select

@@ -21,6 +21,7 @@ interface Props {
 export default function PostCard({ postDetail }: Props) {
   const [styleSize, setSyleSize] = useState<string>(s.size1);
   const [iconContact, setIconContact] = useState<string>("");
+  const [slowlyShow, setSlowlyShow] = useState(postDetail.slowly);
 
   const { statusUser } = useLogin();
   const cld = new Cloudinary({
@@ -66,6 +67,16 @@ export default function PostCard({ postDetail }: Props) {
   }, [postDetail.size.size]);
   const myImage = cld.image(postDetail.img);
 
+  useEffect(() => {
+    if (slowlyShow) {
+      const time = generateRandomTime();
+
+      setTimeout(() => {
+        setSlowlyShow(false);
+      }, time);
+    }
+  });
+
   const hanlderRedirectToContact = () => {
     if (
       postDetail.contactType === "personal-page" ||
@@ -82,10 +93,16 @@ export default function PostCard({ postDetail }: Props) {
   };
 
   return (
-    <div className={styleSize}>
+    <div
+      className={styleSize}
+      style={{
+        opacity: slowlyShow ? 0 : 1,
+        transition: "all 0.5s",
+      }}
+    >
       <AdvancedImage cldImg={myImage} alt="image" />
       <div className={s.containerIcons}>
-        {iconContact ? (
+        {iconContact && iconContact !== "none" ? (
           <img
             src={iconContact}
             alt="contact"
@@ -95,7 +112,7 @@ export default function PostCard({ postDetail }: Props) {
         ) : (
           <></>
         )}
-        {statusUser.acces ? (
+        {statusUser.acces ? ( //!Esto me esta matando el rendimiento
           <Link to={`/edit/${postDetail.id}`} className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
@@ -105,4 +122,13 @@ export default function PostCard({ postDetail }: Props) {
       </div>
     </div>
   );
+}
+function generateRandomTime() {
+  // Generate a random number between 0.5 and 1.5 seconds
+  const randomTime = Math.random() * 1 + 0.5;
+
+  // Convert time from seconds to milliseconds
+  const timeInMilliseconds = randomTime * 1000;
+
+  return timeInMilliseconds;
 }

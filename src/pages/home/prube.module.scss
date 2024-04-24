@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   padding-block: 5%;
-
   .containerData {
     width: 80vw;
     padding: 5%;
@@ -15,8 +14,11 @@
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
     background-repeat: repeat;
+    min-height: 200vh;
   }
-
+  .infiniteScroll{
+    padding-block: 5%;
+  }
 }
 
 @media screen and (min-width: 270px) and (max-width: 767px) {

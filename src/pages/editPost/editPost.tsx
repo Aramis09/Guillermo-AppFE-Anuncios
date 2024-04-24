@@ -13,7 +13,6 @@ export default function EditPost() {
   const { result: postDetail } = useMakeRequest<ResponseGetDetailPost>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/posting/getPostDetail?id=${id}`,
   });
-  console.log(postDetail);
 
   const hanlderEditPost = async ({
     contactType,

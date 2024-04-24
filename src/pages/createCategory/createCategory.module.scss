@@ -2,8 +2,13 @@
     display: flex;
     justify-content: center;
     height: 80vh;
+    padding: 10%;
     .containerForm {
         width: 50%;
+        button {
+            color: white;
+            border-radius: 100px;
+        }
     }
 }
 

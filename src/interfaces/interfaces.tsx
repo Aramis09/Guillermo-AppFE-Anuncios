@@ -19,6 +19,7 @@ export interface PostDetail {
   categoryId: null;
   sectionId: number;
   size: Size;
+  slowly?: boolean;
   importance: ImportanceClass;
   section: Section;
   contactValue: string;

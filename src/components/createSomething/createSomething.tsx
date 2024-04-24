@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import s from "./s.module.scss";
 
 interface Props {
-  onClickSave: (algo: any) => Promise<void>;
+  onClickSave: (algo: unknown) => Promise<void>;
 }
 
 export default function CreateSomething({ onClickSave }: Props) {
@@ -34,7 +34,7 @@ export default function CreateSomething({ onClickSave }: Props) {
       </form>
       <ul>
         {itemsList.map((item) => (
-          <li key={Math.random()}>
+          <li key={crypto.randomUUID()}>
             {item} <button onClick={() => removeItemFromList(item)}>x</button>
           </li>
         ))}

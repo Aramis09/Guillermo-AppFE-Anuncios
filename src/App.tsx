@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/home/home";
-import useLoaderManage from "./hooks/useLoader";
+// import useLoaderManage from "./hooks/useLoader";
 import Navbar from "./components/navbar/navbar";
 // import Events from "./pages/events/events";
 // import UsefulInformation from "./pages/useful-information/useful-information";
@@ -14,19 +14,16 @@ import CreatePost from "./pages/createPost/createPost";
 import Contact from "./pages/contact/contact";
 import EditPost from "./pages/editPost/editPost";
 import SearchPost from "./pages/search/searchPost";
+import { useContextLoader } from "./contexts/hooks/useContextLoader";
 
 function App() {
-  const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
-  console.log(
-    import.meta.env.VITE_SOME_BASE_URL ===
-      "https://fp17v6p5-3001.brs.devtunnels.ms"
-  );
-
+  // const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
+  const contextLoader = useContextLoader();
   return (
     <div className="home">
       <Navbar />
       <Presentation />
-      {LoaderAllViewport}
+      {contextLoader?.LoaderAllViewport}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />

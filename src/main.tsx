@@ -4,12 +4,15 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import ProviderRedux from "./redux/provider.tsx";
+import ProviderContextLoader from "./contexts/contextLoader.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <ProviderRedux>
-        <App />
+        <ProviderContextLoader>
+          <App />
+        </ProviderContextLoader>
       </ProviderRedux>
     </BrowserRouter>
   </React.StrictMode>

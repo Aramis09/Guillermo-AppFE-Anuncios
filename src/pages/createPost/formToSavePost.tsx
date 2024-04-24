@@ -194,7 +194,7 @@ export default function FormToSavePost({
               Tipo de contacto
             </option>
             {contacts?.data.map((ct) => (
-              <option key={Math.random()} value={ct.type}>
+              <option key={crypto.randomUUID()} value={ct.type}>
                 {ct.type}
               </option>
             ))}
