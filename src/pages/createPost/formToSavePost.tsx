@@ -108,17 +108,6 @@ export default function FormToSavePost({
     const contactType = fields["contactType"] as string;
     const owner = fields["owner"] as string;
     const expire = fields["expire"] as string;
-    console.log(expire);
-
-    // const expire = expireWrongFormat
-    //   .split("")
-    //   .map((e) => {
-    //     if (e === "-") {
-    //       return "/";
-    //     }
-    //     return e;
-    //   })
-    //   .join("");
 
     await onSave({
       contactType,
@@ -177,7 +166,7 @@ export default function FormToSavePost({
           id="categories"
           value={categoriesSelected}
           multiple
-          required={required}
+          required={window.innerWidth <= 950 ? false : required}
           onChange={handleCategories}
         >
           <option value="" disabled selected>

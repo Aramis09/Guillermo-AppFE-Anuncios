@@ -47,8 +47,6 @@ export default function CreatePost() {
     })
       .then(() => alert("El anuncio fue creado!"))
       .catch(() => alert("Hubo un error, contacte al desarrollador"));
-    // alert("El anuncio fue creado");
-    // window.location.href = "/";
   };
 
   return (
