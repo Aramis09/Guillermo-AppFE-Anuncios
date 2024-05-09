@@ -69,16 +69,16 @@ export default function FormToSavePost({
 
   const myImage = cld.image(publicId);
 
-  const handleCategories = (nameCat: string) => {
+  const handleCategories = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     alert("Entre");
 
     //?Esto agrega las categorias a un array para luego mostrarlas
-    if (categoriesSelected.includes(nameCat)) {
+    if (categoriesSelected.includes(evt.target.value)) {
       return setCategoriesSelected((prev) => [
-        ...prev.filter((categ) => categ !== nameCat),
+        ...prev.filter((categ) => categ !== evt.target.value),
       ]);
     }
-    return setCategoriesSelected((prev) => [...prev, nameCat]);
+    return setCategoriesSelected((prev) => [...prev, evt.target.value]);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -161,8 +161,7 @@ export default function FormToSavePost({
           id="categories"
           required={window.innerWidth > 950 ? false : required}
           multiple
-
-          // onChange={handleCategories}
+          onChange={handleCategories}
         >
           <option value="" disabled selected>
             Elija una categoria
@@ -171,8 +170,7 @@ export default function FormToSavePost({
             <option
               key={category.id}
               value={category.name}
-              onClick={() => handleCategories(category.name)}
-              onTouchStartCapture={() => handleCategories(category.name)}
+              // onClick={() => handleCategories(category.name)}
               style={
                 isCategorySelected(categoriesSelected, category.name)
                   ? {
