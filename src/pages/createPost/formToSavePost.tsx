@@ -90,7 +90,8 @@ export default function FormToSavePost({
       alert(
         "Por favor primero cree por lo menos una categoria para poder asignarle a la imagen"
       );
-
+    if (categoriesSelected.length === 0)
+      return alert("Por favor, agregue una categoria");
     const form = event.target as HTMLFormElement;
     const fields = Object.fromEntries(new window.FormData(form));
 
@@ -158,7 +159,7 @@ export default function FormToSavePost({
         <select
           name="categories"
           id="categories"
-          required={required}
+          required={window.innerWidth > 950 ? false : required}
           multiple
 
           // onChange={handleCategories}
