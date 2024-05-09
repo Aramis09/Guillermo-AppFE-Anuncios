@@ -69,23 +69,16 @@ export default function FormToSavePost({
 
   const myImage = cld.image(publicId);
 
-  const handleCategories = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-    const options = evt.target.options;
-    const currentIndexSelected = evt.target.selectedIndex;
-    for (let i = 0; i < options.length; i++) {
-      if (options[i].index === currentIndexSelected) {
-        if (!categoriesSelected.includes(options[i].value)) {
-          setCategoriesSelected((prev) => [...prev, options[i].value]);
-        } else {
-          setCategoriesSelected((prev) => {
-            const newState = prev.filter(
-              (nameCat) => nameCat !== options[i].value
-            );
-            return newState;
-          });
-        }
-      }
+  const handleCategories = (nameCat: string) => {
+    console.log("Entre", "<<<<<<<<<<<<<<<");
+
+    //?Esto agrega las categorias a un array para luego mostrarlas
+    if (categoriesSelected.includes(nameCat)) {
+      return setCategoriesSelected((prev) => [
+        ...prev.filter((categ) => categ !== nameCat),
+      ]);
     }
+    return setCategoriesSelected((prev) => [...prev, nameCat]);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -121,6 +114,7 @@ export default function FormToSavePost({
       expire: expire,
     });
   };
+  console.log(categoriesSelected);
 
   return (
     <section className={s.container} onSubmit={handleSubmit}>
@@ -164,17 +158,31 @@ export default function FormToSavePost({
         <select
           name="categories"
           id="categories"
-          value={categoriesSelected}
+          required={required}
           multiple
-          required={window.innerWidth <= 950 ? false : required}
-          onChange={handleCategories}
+
+          // onChange={handleCategories}
         >
           <option value="" disabled selected>
             Elija una categoria
           </option>
           {categories?.data.map((category) => (
-            <option key={category.id} value={category.name}>
-              {category.name}
+            <option
+              key={category.id}
+              value={category.name}
+              onClick={() => handleCategories(category.name)}
+              style={
+                isCategorySelected(categoriesSelected, category.name)
+                  ? {
+                      backgroundColor: "#4ccd99",
+                      color: "white",
+                    }
+                  : {}
+              }
+            >
+              {`${category.name} ${
+                isCategorySelected(categoriesSelected, category.name) ? "✔" : ""
+              } `}
             </option>
           ))}
         </select>
@@ -206,16 +214,7 @@ export default function FormToSavePost({
   );
 }
 
-// function removeZerosDate(date: string) {
-//   // Dividir la fecha en partes
-//   const dateArr = date.split("/");
-
-//   // Iterar sobre cada parte y eliminar los ceros si están presentes
-//   for (let i = 0; i < dateArr.length; i++) {
-//     // Convertir la parte en número para eliminar el cero delante
-//     dateArr[i] = parseInt(dateArr[i], 10).toString();
-//   }
-
-//   // Unir las partes de la fecha nuevamente
-//   return dateArr.join("/");
-// }
+const isCategorySelected = (list: string[], category: string) => {
+  if (!list.includes(category)) return false;
+  return true;
+};
