@@ -70,7 +70,7 @@ export default function FormToSavePost({
   const myImage = cld.image(publicId);
 
   const handleCategories = (nameCat: string) => {
-    console.log("Entre", "<<<<<<<<<<<<<<<");
+    alert("Entre");
 
     //?Esto agrega las categorias a un array para luego mostrarlas
     if (categoriesSelected.includes(nameCat)) {
