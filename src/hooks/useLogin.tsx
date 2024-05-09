@@ -36,6 +36,7 @@ export default function useLogin() {
 
   const logOutUser = async () => {
     deleteCookie({ nameCookie: "messiEntroAJugar" });
+    localStorage.removeItem("jwt");
     await isLoggedUser.current();
   };
 
@@ -58,6 +59,7 @@ export default function useLogin() {
         token: "",
         error: true,
       };
+    localStorage.setItem("jwt", status.token);
 
     setStatusUser({
       error: "",

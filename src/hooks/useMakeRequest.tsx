@@ -17,7 +17,11 @@ export function useMakeRequest<T>({ url, method, body }: Params) {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "auth-token",
-      `${getCookie({ nameCookie: "messiEntroAJugar" }).cookiesFound || null}`
+      `${
+        getCookie({ nameCookie: "messiEntroAJugar" }).cookiesFound ||
+        localStorage.getItem("jwt") ||
+        null
+      }`
     );
     myHeaders.append(
       "auth-secret-key",
@@ -47,7 +51,11 @@ export function useMakeRequest<T>({ url, method, body }: Params) {
     const myHeaders = new Headers();
     myHeaders.append(
       "auth-token",
-      `${getCookie({ nameCookie: "messiEntroAJugar" }).cookiesFound || null}`
+      `${
+        getCookie({ nameCookie: "messiEntroAJugar" }).cookiesFound ||
+        localStorage.getItem("jwt") ||
+        null
+      }`
     );
     myHeaders.append("Content-Type", "application/json");
 
