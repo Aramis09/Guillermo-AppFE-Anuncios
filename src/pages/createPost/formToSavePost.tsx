@@ -70,8 +70,6 @@ export default function FormToSavePost({
   const myImage = cld.image(publicId);
 
   const handleCategories = (evt: React.ChangeEvent<HTMLSelectElement>) => {
-    alert("Entre");
-
     //?Esto agrega las categorias a un array para luego mostrarlas
     if (categoriesSelected.includes(evt.target.value)) {
       return setCategoriesSelected((prev) => [
@@ -115,7 +113,6 @@ export default function FormToSavePost({
       expire: expire,
     });
   };
-  console.log(categoriesSelected);
 
   return (
     <section className={s.container} onSubmit={handleSubmit}>
@@ -170,7 +167,6 @@ export default function FormToSavePost({
             <option
               key={category.id}
               value={category.name}
-              // onClick={() => handleCategories(category.name)}
               style={
                 isCategorySelected(categoriesSelected, category.name)
                   ? {
