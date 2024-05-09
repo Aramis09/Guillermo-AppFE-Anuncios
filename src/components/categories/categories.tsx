@@ -6,9 +6,10 @@ import { useEffect } from "react";
 interface Props {
   positionCoordinates?: string;
   onClick: ({ categorySelected }: { categorySelected: string }) => void;
+  valueSelected: string;
 }
 
-export default function Categories({ onClick }: Props) {
+export default function Categories({ onClick, valueSelected }: Props) {
   const categorySelectedFound = localStorage.getItem("categorySelected");
   const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
@@ -33,6 +34,7 @@ export default function Categories({ onClick }: Props) {
         name="categories"
         id="categories"
         required
+        value={valueSelected}
         onChange={handleCategoriesSelected}
         className={s.container}
       >

@@ -71,7 +71,7 @@ export default function Home() {
     if (categorySelected === "delete") {
       return setCategorySelected(() => []);
     }
-    setPosts(undefined); //!Borramos los que ya hay
+    // setPosts(undefined); //!Borramos los que ya hay
     setCurrentPage(1); //!reiniciamos la page asi el useEffect  de arriba cargue los nuevos archivos
     setCategorySelected(() => [categorySelected]); //! seteamos la categoria nueva
   };
@@ -79,7 +79,10 @@ export default function Home() {
   if (!posts || isError)
     return (
       <>
-        <Categories onClick={handlerChangeCategory} />
+        <Categories
+          onClick={handlerChangeCategory}
+          valueSelected={categorySelected[0]}
+        />
         {/* {LoaderAllViewport} */}
         <Error />
       </>
@@ -87,13 +90,19 @@ export default function Home() {
   if (!posts.data.length)
     return (
       <>
-        <Categories onClick={handlerChangeCategory} />
+        <Categories
+          onClick={handlerChangeCategory}
+          valueSelected={categorySelected[0]}
+        />
         <Empty />
       </>
     );
   return (
     <div className={s.container}>
-      <Categories onClick={handlerChangeCategory} />
+      <Categories
+        onClick={handlerChangeCategory}
+        valueSelected={categorySelected[0]}
+      />
       <InfiniteScroll
         dataLength={posts.data.length} //! ESTE ES EL ERROR NO LO TRAIGO SIEMPRE DEL BACCKENDThis is important field to render the next data
         next={hanlderMoreDataScroll}
