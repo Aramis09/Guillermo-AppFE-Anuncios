@@ -13,8 +13,8 @@ export default function CreateCategory() {
         categories: listItems,
       },
     })
-      .then((r) => alert(JSON.stringify(r)))
-      .catch((e) => JSON.stringify(e));
+      .then(() => alert("La categoria fue creada!"))
+      .catch(() => alert("Hubo un error, contacte al desarrollador"));
   };
 
   return (
