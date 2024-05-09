@@ -172,6 +172,7 @@ export default function FormToSavePost({
               key={category.id}
               value={category.name}
               onClick={() => handleCategories(category.name)}
+              onTouchEnd={() => handleCategories(category.name)}
               style={
                 isCategorySelected(categoriesSelected, category.name)
                   ? {
