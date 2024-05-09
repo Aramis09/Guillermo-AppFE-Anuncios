@@ -107,16 +107,18 @@ export default function FormToSavePost({
     const contactValue = fields["contactValue"] as string;
     const contactType = fields["contactType"] as string;
     const owner = fields["owner"] as string;
-    const expireWrongFormat = fields["expire"] as string;
-    const expire = expireWrongFormat
-      .split("")
-      .map((e) => {
-        if (e === "-") {
-          return "/";
-        }
-        return e;
-      })
-      .join("");
+    const expire = fields["expire"] as string;
+    console.log(expire);
+
+    // const expire = expireWrongFormat
+    //   .split("")
+    //   .map((e) => {
+    //     if (e === "-") {
+    //       return "/";
+    //     }
+    //     return e;
+    //   })
+    //   .join("");
 
     await onSave({
       contactType,
@@ -127,7 +129,7 @@ export default function FormToSavePost({
       categoriesSelected,
       publicId,
       owner,
-      expire: removeZerosDate(expire),
+      expire: expire,
     });
   };
 
@@ -215,16 +217,16 @@ export default function FormToSavePost({
   );
 }
 
-function removeZerosDate(date: string) {
-  // Dividir la fecha en partes
-  const dateArr = date.split("/");
+// function removeZerosDate(date: string) {
+//   // Dividir la fecha en partes
+//   const dateArr = date.split("/");
 
-  // Iterar sobre cada parte y eliminar los ceros si están presentes
-  for (let i = 0; i < dateArr.length; i++) {
-    // Convertir la parte en número para eliminar el cero delante
-    dateArr[i] = parseInt(dateArr[i], 10).toString();
-  }
+//   // Iterar sobre cada parte y eliminar los ceros si están presentes
+//   for (let i = 0; i < dateArr.length; i++) {
+//     // Convertir la parte en número para eliminar el cero delante
+//     dateArr[i] = parseInt(dateArr[i], 10).toString();
+//   }
 
-  // Unir las partes de la fecha nuevamente
-  return dateArr.join("/");
-}
+//   // Unir las partes de la fecha nuevamente
+//   return dateArr.join("/");
+// }
