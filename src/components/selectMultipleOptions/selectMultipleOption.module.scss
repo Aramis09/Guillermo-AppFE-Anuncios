@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  text-align: center;
+  border: 1px solid rgba(205, 205, 205, 0.683);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  .placeHolder{
+    color: gray;
+  }
+  .list{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
