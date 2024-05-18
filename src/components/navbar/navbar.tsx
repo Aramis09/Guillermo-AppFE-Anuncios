@@ -39,7 +39,7 @@ export default function Navbar() {
         <Link
           to="/"
           className={s.links}
-          onClick={changeStyles}
+          // onClick={changeStyles}
           style={styleSelected("/", location)}
         >
           <img src={iconMain} alt="homeImg" />
@@ -48,7 +48,7 @@ export default function Navbar() {
         <Link
           to="/useful-info"
           className={s.links}
-          onClick={changeStyles}
+          // onClick={changeStyles}
           style={styleSelected("/useful-info", location)}
         >
           <img src={iconNews} alt="eventsImg" />
@@ -57,7 +57,7 @@ export default function Navbar() {
         <Link
           to="/events"
           className={s.links}
-          onClick={changeStyles}
+          // onClick={changeStyles}
           style={styleSelected("/events", location)}
         >
           <img src={iconEvents} alt="eventsImg" />
