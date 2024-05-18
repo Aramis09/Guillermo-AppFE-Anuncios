@@ -9,16 +9,14 @@
   cursor: pointer;
   option {
     cursor: pointer;
-    
   }
 }
 
 @media screen and (min-width: 270px) and (max-width: 1024px) {
-
   .container {
     width: 100%;
     left: 0;
-    top: 35px;
+    top: 95px;
     padding: 3%;
     text-align: center;
     background-color: #198ffd;

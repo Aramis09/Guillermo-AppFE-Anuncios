@@ -49,21 +49,49 @@
 // }
 
 
+
 @media screen and (min-width: 270px) and (max-width: 1024px) {
 
-  .container,.containerHiden {
+  .container{
     width: 100%;
-    height: 100vh;
-    flex-direction: column;
-    gap: 5rem;
+    gap: 1rem;
     font-size: 2rem;
     background-color: #0b60b0;
     padding-block: 0px;
     transition: all  0.5s;
+    padding-block: 1rem;
+    top: 2rem;
     .linkAdmin,.linkSearch {
       position: static;
+      display: none; //!Agregado ahora 17/05, sacamos los elementos de la vista del usuario para dejarlos solo en vista de admin, esto es solo necesario en mobile
     }
 
+  }
+
+  .containerMobile,.containerHiden{
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        z-index: 1500;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #0b60b0;
+        padding-bottom: 9rem;
+        padding-top: 9rem;
+        transition: all  0.5s;
+        .linkAdmin,.linkSearch {
+          position: static;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          font-size: 1rem;
+          margin: 2rem;
+          color: white;
+          img{
+            width:3rem ;
+          }
+        }
   }
 
   .containerHiden{
@@ -83,7 +111,45 @@
     z-index: 4000;
     top: 0;
     left: 0;
-    // display: block;
   }
 
 }
+
+// @media screen and (min-width: 270px) and (max-width: 1024px) {
+
+//   .container,.containerHiden {
+//     width: 100%;
+//     height: 100vh;
+//     flex-direction: column;
+//     gap: 5rem;
+//     font-size: 2rem;
+//     background-color: #0b60b0;
+//     padding-block: 0px;
+//     transition: all  0.5s;
+//     .linkAdmin,.linkSearch {
+//       position: static;
+//     }
+
+//   }
+
+//   .containerHiden{
+//     opacity: 0;
+//     z-index: -1;
+//     transition: all  0.5s;
+//   }
+  
+//   .mobileMenuButton{
+//     background-color: black;
+//     width: 100%;
+//     height: 35px;
+//     border: none;
+//     color: white;
+//     cursor: pointer;
+//     position: fixed;
+//     z-index: 4000;
+//     top: 0;
+//     left: 0;
+//     // display: block;
+//   }
+
+// }

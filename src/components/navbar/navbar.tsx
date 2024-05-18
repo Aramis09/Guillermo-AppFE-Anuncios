@@ -4,27 +4,38 @@ import iconEvents from "../../assets/icons/evets.svg";
 import iconNews from "../../assets/icons/news.svg";
 import iconSearch from "../../assets/icons/search.svg";
 import iconPlus from "../../assets/icons/plus.svg";
+import iconLogout from "../../assets/icons/logout.svg";
 
 import s from "./navbar.module.scss";
-import useLogin from "../../hooks/useLogin";
 import { useChangeStylesClick } from "../../hooks/useChangeStylesClick";
+import { useContextAuth } from "../../contexts/hooks/useContextAuth";
 
 export default function Navbar() {
   const location = useLocation().pathname;
-  const { statusUser } = useLogin();
+  const contextAuth = useContextAuth();
 
   const { style, changeStyles } = useChangeStylesClick({
     styles: s,
     first: "containerHiden",
-    second: "container",
+    second: "containerMobile",
   });
+
+  const conditionMobile =
+    window.innerWidth < 1024 && contextAuth?.statusUser.acces;
 
   return (
     <>
-      <button className={s.mobileMenuButton} onClick={changeStyles}>
-        X
-      </button>
-      <div className={style}>
+      {conditionMobile ? (
+        <button className={s.mobileMenuButton} onClick={changeStyles}>
+          X
+        </button>
+      ) : (
+        <></>
+      )}
+      <div
+        className={s.container}
+        style={{ top: conditionMobile ? "2rem" : "0rem" }}
+      >
         <Link
           to="/"
           className={s.links}
@@ -52,7 +63,7 @@ export default function Navbar() {
           <img src={iconEvents} alt="eventsImg" />
           <p className={s.textHiden}>Eventos</p>
         </Link>
-        {statusUser.acces ? (
+        {contextAuth?.statusUser.acces ? (
           <Link
             to="/search"
             className={s.linkSearch}
@@ -72,13 +83,57 @@ export default function Navbar() {
           onClick={changeStyles}
           style={{
             ...styleSelected("/create", location),
-            display: !statusUser.acces ? "none" : "block",
+            display:
+              !contextAuth?.statusUser.acces || window.innerWidth < 1024
+                ? "none"
+                : "block",
           }}
         >
           <img src={iconPlus} alt="eventsImg" />
           <p className={s.textHiden}>Crear</p>
         </Link>
       </div>
+      {conditionMobile ? (
+        <div className={style}>
+          <Link //!adasdklajksdjkaskd
+            to="/create"
+            className={s.linkAdmin}
+            onClick={() => contextAuth?.logOutUser()}
+            style={{
+              display: !contextAuth?.statusUser.acces ? "none" : "flex",
+            }}
+          >
+            <img src={iconLogout} alt="eventsImg" />
+            <p className={s.textHiden}>Cerrar sesion</p>
+          </Link>
+          <Link
+            to="/create"
+            className={s.linkAdmin}
+            onClick={changeStyles}
+            style={{
+              ...styleSelected("/create", location),
+              display: !contextAuth?.statusUser.acces ? "none" : "flex",
+            }}
+          >
+            <img src={iconPlus} alt="eventsImg" />
+            <p className={s.textHiden}>Crear</p>
+          </Link>
+          <Link
+            to="/search"
+            className={s.linkSearch}
+            onClick={changeStyles}
+            style={{
+              ...styleSelected("/search", location),
+              display: !contextAuth?.statusUser.acces ? "none" : "flex",
+            }}
+          >
+            <img src={iconSearch} alt="eventsImg" />
+            <p className={s.textHiden}>Buscar anuncio</p>
+          </Link>
+        </div>
+      ) : (
+        <></>
+      )}
     </>
   );
 }

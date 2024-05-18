@@ -8,6 +8,8 @@ import {
   ResponseGetAllCategories,
   ResponseGetAllContacts,
 } from "../../interfaces/interfaces";
+import SelectMultipleOption from "../../components/selectMultipleOptions/selectMultipleOption";
+import { isCategorySelected } from "../../utils/funciontUtils";
 
 interface Params {
   onSave: ({
@@ -69,14 +71,17 @@ export default function FormToSavePost({
 
   const myImage = cld.image(publicId);
 
-  const handleCategories = (evt: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleCategories = (
+    evt: React.ChangeEvent<HTMLSelectElement> | string
+  ) => {
     //?Esto agrega las categorias a un array para luego mostrarlas
-    if (categoriesSelected.includes(evt.target.value)) {
+    const entryData = typeof evt === "string" ? evt : evt.target.value;
+    if (categoriesSelected.includes(entryData)) {
       return setCategoriesSelected((prev) => [
-        ...prev.filter((categ) => categ !== evt.target.value),
+        ...prev.filter((categ) => categ !== entryData),
       ]);
     }
-    return setCategoriesSelected((prev) => [...prev, evt.target.value]);
+    return setCategoriesSelected((prev) => [...prev, entryData]);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -88,8 +93,7 @@ export default function FormToSavePost({
       alert(
         "Por favor primero cree por lo menos una categoria para poder asignarle a la imagen"
       );
-    if (categoriesSelected.length === 0)
-      return alert("Por favor, agregue una categoria");
+
     const form = event.target as HTMLFormElement;
     const fields = Object.fromEntries(new window.FormData(form));
 
@@ -153,35 +157,48 @@ export default function FormToSavePost({
             </option>
           ))}
         </select>
-        <select
-          name="categories"
-          id="categories"
-          required={window.innerWidth > 950 ? false : required}
-          multiple
-          onChange={handleCategories}
-        >
-          <option value="" disabled selected>
-            Elija una categoria
-          </option>
-          {categories?.data.map((category) => (
-            <option
-              key={category.id}
-              value={category.name}
-              style={
-                isCategorySelected(categoriesSelected, category.name)
-                  ? {
-                      backgroundColor: "#4ccd99",
-                      color: "white",
-                    }
-                  : {}
-              }
-            >
-              {`${category.name} ${
-                isCategorySelected(categoriesSelected, category.name) ? "✔" : ""
-              } `}
+        {window.innerWidth > 1024 ? (
+          <select
+            name="categories"
+            id="categories"
+            required={required}
+            multiple
+            onChange={handleCategories}
+          >
+            <option value="" disabled selected>
+              Elija una categoria
             </option>
-          ))}
-        </select>
+            {categories?.data.map((category) => (
+              <option
+                key={category.id}
+                value={category.name}
+                style={
+                  isCategorySelected(categoriesSelected, category.name)
+                    ? {
+                        backgroundColor: "#4ccd99",
+                        color: "white",
+                      }
+                    : {}
+                }
+              >
+                {`${category.name} ${
+                  isCategorySelected(categoriesSelected, category.name)
+                    ? "✔"
+                    : ""
+                } `}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <></>
+        )}
+        <SelectMultipleOption
+          placeHolder="Elija Categorias"
+          options={categories?.data}
+          onClickOption={handleCategories}
+          onlyMobile={true}
+          listSelected={categoriesSelected}
+        />
         <div className={s.divsContainers}>
           Define un medio de contacto
           <select name="contactType" id="contactType">
@@ -209,8 +226,3 @@ export default function FormToSavePost({
     </section>
   );
 }
-
-const isCategorySelected = (list: string[], category: string) => {
-  if (!list.includes(category)) return false;
-  return true;
-};

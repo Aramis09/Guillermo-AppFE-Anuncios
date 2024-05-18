@@ -53,7 +53,7 @@ export default function EditPost() {
     });
     window.location.href = "/";
   };
-
+  if (!postDetail) return <>No hay datos de este publicacion</>;
   return (
     <div className={s.container}>
       <FormToSavePost
@@ -66,7 +66,10 @@ export default function EditPost() {
       />
       <div>
         <p>Nombre Cliente: {postDetail?.data.owner}</p>
-        <p>Fecha de expiracion: {postDetail?.data.expire}</p>
+        <p>
+          Fecha de expiracion:{" "}
+          {new Date(postDetail.data.expire).toLocaleDateString()}
+        </p>
         <p>Tipo de contacto: {postDetail?.data.contactType}</p>
         <p>Contacto: {postDetail?.data.contactValue}</p>
         <p>Categorias: {postDetail?.data.section.name}</p>

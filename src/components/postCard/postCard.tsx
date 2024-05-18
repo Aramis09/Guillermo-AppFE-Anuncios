@@ -8,7 +8,6 @@ import { AdvancedImage } from "@cloudinary/react";
 import wppIcon from "../../assets/icons/wpp.svg";
 import phoneIcon from "../../assets/icons/phone.svg";
 import webIcon from "../../assets/icons/web.svg";
-import linkIcon from "../../assets/icons/web.svg";
 import editIcon from "../../assets/icons/edit.svg";
 
 import { Link } from "react-router-dom";
@@ -23,7 +22,6 @@ export default function PostCard({ postDetail }: Props) {
   const [iconContact, setIconContact] = useState<string>("");
   const [slowlyShow, setSlowlyShow] = useState(postDetail.slowly);
   const contextAuth = useContextAuth();
-  // const { statusUser } = useLogin();
   const cld = new Cloudinary({
     cloud: {
       cloudName: import.meta.env.VITE_SOME_CLOUD_NAME,
@@ -59,7 +57,7 @@ export default function PostCard({ postDetail }: Props) {
         setIconContact(webIcon);
         break;
       case "none":
-        setIconContact(linkIcon);
+        setIconContact("");
         break;
       default:
         setIconContact("");
@@ -112,7 +110,7 @@ export default function PostCard({ postDetail }: Props) {
         ) : (
           <></>
         )}
-        {contextAuth?.statusUser.acces ? ( //!Esto me esta matando el rendimiento
+        {contextAuth?.statusUser.acces ? (
           <Link to={`/edit/${postDetail.id}`} className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
