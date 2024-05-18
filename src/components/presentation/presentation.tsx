@@ -1,10 +1,16 @@
 import s from "./presentations.module.scss";
 import imgBk from "../../assets/images/bk.jpg";
 import { Link } from "react-router-dom";
+import { useContextAuth } from "../../contexts/hooks/useContextAuth";
 
 export default function Presentation() {
+  const contextAuth = useContextAuth();
+
   return (
-    <div className={s.container}>
+    <div
+      className={s.container}
+      style={{ top: contextAuth?.statusUser ? "70px" : undefined }}
+    >
       <img src={imgBk} alt="background" />
       <div className={s.containerText}>
         <h2 className={s.containerBigText}>
@@ -16,7 +22,9 @@ export default function Presentation() {
           <br />
           todo para hacer de nuestro barrio cada dia mejor...
         </p>
-        <Link to="/contact" className={s.button}>PUBLICITE AQUI</Link>
+        <Link to="/contact" className={s.button}>
+          PUBLICITE AQUI
+        </Link>
       </div>
     </div>
   );

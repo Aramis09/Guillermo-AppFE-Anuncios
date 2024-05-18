@@ -2,6 +2,7 @@ import s from "./categories.module.scss";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetAllCategories } from "../../interfaces/interfaces";
 import { useEffect } from "react";
+import { useContextAuth } from "../../contexts/hooks/useContextAuth";
 
 interface Props {
   positionCoordinates?: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function Categories({ onClick, valueSelected }: Props) {
+  const contextAuth = useContextAuth();
   const categorySelectedFound = localStorage.getItem("categorySelected");
   const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
@@ -29,36 +31,37 @@ export default function Categories({ onClick, valueSelected }: Props) {
     };
   }, []);
   return (
-    <>
-      <select
-        name="categories"
-        id="categories"
-        required
-        value={valueSelected}
-        onChange={handleCategoriesSelected}
-        className={s.container}
-      >
-        <option value="" disabled selected>
-          Elija una categoria
+    <select
+      name="categories"
+      id="categories"
+      required
+      value={valueSelected}
+      onChange={handleCategoriesSelected}
+      className={s.container}
+      style={{
+        top: contextAuth && contextAuth.statusUser.acces ? "126px" : undefined,
+      }}
+    >
+      <option value="" disabled selected>
+        Elija una categoria
+      </option>
+      <option value="delete">Sin filtro</option>
+      {categories?.data.map((category) => (
+        <option
+          key={category.id}
+          value={category.name}
+          style={
+            categorySelectedFound === category.name
+              ? {
+                  backgroundColor: "#136fc6",
+                  color: "white",
+                }
+              : undefined
+          }
+        >
+          {category.name}
         </option>
-        <option value="delete">Sin filtro</option>
-        {categories?.data.map((category) => (
-          <option
-            key={category.id}
-            value={category.name}
-            style={
-              categorySelectedFound === category.name
-                ? {
-                    backgroundColor: "#136fc6",
-                    color: "white",
-                  }
-                : undefined
-            }
-          >
-            {category.name}
-          </option>
-        ))}
-      </select>
-    </>
+      ))}
+    </select>
   );
 }
