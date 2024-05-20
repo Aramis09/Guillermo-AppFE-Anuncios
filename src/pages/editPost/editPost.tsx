@@ -3,17 +3,20 @@ import FormToSavePost from "../createPost/formToSavePost";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import ImagesCloudinary from "../../components/imagesCloudinary/imagesCloudinary";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ResponseGetDetailPost } from "../../interfaces/interfaces";
+import { Button } from "../../styledComponents/Button";
+import { useDeletePostMutation } from "../../redux/services/apiPost";
 
 export default function EditPost() {
+  const navigate = useNavigate();
   const { makeNewRequest } = useMakeRequest({});
   const [publicId, setPublicId] = useState<string>("");
   const { id } = useParams();
   const { result: postDetail } = useMakeRequest<ResponseGetDetailPost>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/posting/getPostDetail?id=${id}`,
   });
-
+  const [deletePost] = useDeletePostMutation();
   const hanlderEditPost = async ({
     contactType,
     contactValue,
@@ -53,6 +56,21 @@ export default function EditPost() {
     });
     window.location.href = "/";
   };
+
+  const hanlderDeletePost = () => {
+    const responseUser = confirm(
+      "Estas seguro de que quiere borrar definitivamente el post ?"
+    );
+    if (!responseUser) return;
+    if (!id) return alert("No se puro borrar, recargue la pagina");
+    deletePost(id)
+      .then(() => {
+        alert("Borrado con exito");
+        navigate("/");
+      })
+      .catch(() => alert("No se pudo borrar..."));
+  };
+
   if (!postDetail) return <>No hay datos de este publicacion</>;
   return (
     <div className={s.container}>
@@ -64,7 +82,10 @@ export default function EditPost() {
         publicId={publicId}
         titleButton="Editar"
       />
-      <div>
+      <Button onClick={hanlderDeletePost} className={s.buttonDelete}>
+        Borrar
+      </Button>
+      <div className={s.currentData}>
         <p>Nombre Cliente: {postDetail?.data.owner}</p>
         <p>
           Fecha de expiracion:{" "}
@@ -80,7 +101,7 @@ export default function EditPost() {
           <p>{cat.name}</p>
         ))}
       </div>
-      <div className={s.containerImages} style={{ width: "50%" }}>
+      <div className={s.containerImages} style={{ width: "100%" }}>
         <ImagesCloudinary setImage={setPublicId} image={publicId} />
       </div>
     </div>

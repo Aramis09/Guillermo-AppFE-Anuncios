@@ -24,7 +24,7 @@ export const postApi = createApi({
       return headers;
     },
   }),
-  tagTypes: [""],
+  tagTypes: ["getPost"],
   endpoints: (builder) => ({
     getPostList: builder.query<
       ResponseGetPosts,
@@ -44,6 +44,7 @@ export const postApi = createApi({
         }
         return `${url}?page=${page}&section=${section}`;
       },
+      providesTags: ["getPost"],
     }),
     searchPostByOwner: builder.query<
       ResponseGetPosts,
@@ -56,11 +57,19 @@ export const postApi = createApi({
         method: "get",
       }),
     }),
+    deletePost: builder.mutation({
+      query: (id: string) => ({
+        url: `${import.meta.env.VITE_SOME_BASE_URL}/posting/?idPost=${id}`,
+        method: "delete",
+      }),
+      invalidatesTags: ["getPost"],
+    }),
   }),
 });
 
 export const {
   useGetPostListQuery,
   useSearchPostByOwnerQuery,
+  useDeletePostMutation,
   // useGetPostPageMutation
 } = postApi;

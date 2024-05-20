@@ -4,13 +4,12 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  padding: 5%;
-
+  background-color: greenyellow;
   .formLogin {
     padding: 5%;
     border-radius: 0.2rem;
     background-color: rgb(255, 255, 255);
-    width: 50%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,8 +27,7 @@
     }
     select,
     option,
-    input,
-    button {
+    input {
       border: 1px solid rgba(205, 205, 205, 0.683);
       margin-block: 5px;
       padding: 1rem;
@@ -43,12 +41,7 @@
     select,input {
       width: 100%;
     }
-    button {
-      width: 100%;
-      background-color: #4ccd99;
-      color: white;
-      font-size: 1.2rem;
-    }
+
     .err {
       color: red;
       font-weight: 400;

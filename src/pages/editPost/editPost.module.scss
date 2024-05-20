@@ -3,4 +3,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+  padding: 30%;
+  padding-top: 5%;
+  .buttonDelete {
+    background-color: red;
+  }
+  .currentData {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 270px) and (max-width: 767px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 5%;
+
+  }
+  
 }

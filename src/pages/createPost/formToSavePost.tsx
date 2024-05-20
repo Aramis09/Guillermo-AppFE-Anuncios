@@ -10,6 +10,7 @@ import {
 } from "../../interfaces/interfaces";
 import SelectMultipleOption from "../../components/selectMultipleOptions/selectMultipleOption";
 import { isCategorySelected } from "../../utils/funciontUtils";
+import { Button } from "../../styledComponents/Button";
 
 interface Params {
   onSave: ({
@@ -218,9 +219,9 @@ export default function FormToSavePost({
           Defina fecha de expiracion
           <input type="date" name="expire" required={required} />
         </div>
-        <button type="submit" name="login">
+        <Button type="submit" name="login">
           {titleButton}
-        </button>
+        </Button>
         <p className={s.err}>{err ? err : ""}</p>
       </form>
     </section>

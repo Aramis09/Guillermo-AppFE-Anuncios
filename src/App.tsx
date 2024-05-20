@@ -17,7 +17,6 @@ import SearchPost from "./pages/search/searchPost";
 import { useContextLoader } from "./contexts/hooks/useContextLoader";
 
 function App() {
-  // const { LoaderAllViewport } = useLoaderManage({ turnOnAllPage: true });
   const contextLoader = useContextLoader();
 
   return (
@@ -31,22 +30,20 @@ function App() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/create-categories" element={<CreateCategory />} />
         <Route path="/create-sections" element={<CreateSection />} />
+        <Route path="/edit/:id" element={<EditPost />} />
         <Route path="/login" element={<Login />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/events" element={<Home />} />
         <Route path="/useful-info" element={<Home />} />
-        <Route path="/edit/:id" element={<EditPost />} />
         <Route path="/search" element={<SearchPost />} />
-
-        <Route
-          path="/*"
-          element={
-            <div style={{ margin: "0 auto" }}> No se encontro la pagina </div>
-          }
-        />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
 }
+
+const ErrorPage = () => (
+  <div style={{ margin: "0 auto" }}> No se encontro la pagina </div>
+);
 
 export default App;

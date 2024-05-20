@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { ResultCloudinary } from "../../interfaces/cloudinary";
+import { Button } from "../../styledComponents/Button";
 
 interface Props {
   setPublicId: React.Dispatch<React.SetStateAction<string>>;
@@ -71,14 +72,14 @@ function CloudinaryUploadWidget({ setPublicId }: Props) {
 
   return (
     <CloudinaryScriptContext.Provider value={{ loaded }}>
-      <button
+      <Button
         id="upload_widget"
         className="cloudinary-button"
         onClick={initializeCloudinaryWidget}
         type="button"
       >
         Upload
-      </button>
+      </Button>
     </CloudinaryScriptContext.Provider>
   );
 }
