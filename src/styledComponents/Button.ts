@@ -13,3 +13,13 @@ export const Button = styled.button`
       width: 100%;
       text-align: center;
 `
+
+
+export const ButtonRound = styled(Button)`
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+`

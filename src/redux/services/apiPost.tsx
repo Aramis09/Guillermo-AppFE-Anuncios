@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ResponseGetPosts } from "../../interfaces/interfaces";
+import { BodyCreatePost, ResponseGetPosts } from "../../interfaces/interfaces";
 import { getCookie } from "../../utils/cookies";
 
 export interface BodyDataSppCart {
@@ -24,7 +24,7 @@ export const postApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["getPost"],
+  tagTypes: ["getPostUpdateDelete", "getPostUpdateCreate"],
   endpoints: (builder) => ({
     getPostList: builder.query<
       ResponseGetPosts,
@@ -44,7 +44,7 @@ export const postApi = createApi({
         }
         return `${url}?page=${page}&section=${section}`;
       },
-      providesTags: ["getPost"],
+      providesTags: ["getPostUpdateDelete", "getPostUpdateCreate"],
     }),
     searchPostByOwner: builder.query<
       ResponseGetPosts,
@@ -62,7 +62,15 @@ export const postApi = createApi({
         url: `${import.meta.env.VITE_SOME_BASE_URL}/posting/?idPost=${id}`,
         method: "delete",
       }),
-      invalidatesTags: ["getPost"],
+      invalidatesTags: ["getPostUpdateDelete"],
+    }),
+    createPost: builder.mutation({
+      query: (body: BodyCreatePost) => ({
+        url: `${import.meta.env.VITE_SOME_BASE_URL}/posting`,
+        method: "post",
+        body,
+      }),
+      invalidatesTags: ["getPostUpdateCreate"],
     }),
   }),
 });
@@ -71,5 +79,5 @@ export const {
   useGetPostListQuery,
   useSearchPostByOwnerQuery,
   useDeletePostMutation,
-  // useGetPostPageMutation
+  useCreatePostMutation,
 } = postApi;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import s from "./s.module.scss";
+import { Button, ButtonRound } from "../../styledComponents/Button";
 
 interface Props {
   onClickSave: (listItems: string[]) => Promise<void>;
@@ -30,18 +31,23 @@ export default function CreateSomething({ onClickSave }: Props) {
     <div className={s.container}>
       <form onSubmit={handleAddItem}>
         <input type="text" name="item" placeholder="Agrega  los nombres" />
-        <button type="submit">+</button>
+        <ButtonRound className={s.buttonAddItem} type="submit">
+          +
+        </ButtonRound>
       </form>
       <ul>
         {itemsList.map((item) => (
           <li key={crypto.randomUUID()}>
-            {item} <button onClick={() => removeItemFromList(item)}>x</button>
+            {item}{" "}
+            <ButtonRound onClick={() => removeItemFromList(item)}>
+              x
+            </ButtonRound>
           </li>
         ))}
       </ul>
-      <button className={s.save} onClick={saveItems}>
+      <Button className={s.save} onClick={saveItems}>
         Guardar
-      </button>
+      </Button>
     </div>
   );
 }

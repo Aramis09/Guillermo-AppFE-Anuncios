@@ -13,15 +13,19 @@
         min-height: 30px;
         cursor: pointer;
     }
-    button {
-        min-width: 30px;
-        background-color: rgb(161, 161, 161);
-    }
     form {
         width: 100%;
         display: flex;
         justify-content: center;
         gap: 5px;
+        .buttonAddItem{
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         input {
             width: 100%;
             background-color: rgb(192, 192, 192);
@@ -36,8 +40,15 @@
         flex-direction: column;
         li{
             width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
             text-align: left;
             list-style: none;
+            button {
+                background-color: red;
+            }
         }
     }
     .save {

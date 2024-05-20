@@ -23,7 +23,12 @@ export interface PostDetail {
   importance: ImportanceClass;
   section: Section;
   contactValue: string;
-  contactType: "whatsapp" | "personal-page" | "direct-phone" | "none";
+  contactType:
+    | "Whatsapp"
+    | "Pagina personal"
+    | "Telefono directo"
+    | "Correo"
+    | "Ninguno";
   created_at: string;
   owner: string;
   expire: string;
@@ -79,4 +84,22 @@ export interface ResponseGetAllContacts {
 
 export interface ContactDetail {
   type: string;
+}
+
+export interface ParamsHanlderCreatePost {
+  size: string;
+  importance: string;
+  section: string;
+  contactValue: string;
+  contactType: string;
+  publicId: string;
+  categoriesSelected: string[];
+  owner: string;
+  expire: string;
+}
+
+export interface BodyCreatePost
+  extends Omit<ParamsHanlderCreatePost, "categoriesSelected" | "publicId"> {
+  img: string;
+  categories: string[];
 }

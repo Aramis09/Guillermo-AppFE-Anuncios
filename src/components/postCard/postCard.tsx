@@ -9,6 +9,7 @@ import wppIcon from "../../assets/icons/wpp.svg";
 import phoneIcon from "../../assets/icons/phone.svg";
 import webIcon from "../../assets/icons/web.svg";
 import editIcon from "../../assets/icons/edit.svg";
+import emailIcon from "../../assets/icons/email.svg";
 
 import { Link } from "react-router-dom";
 import { useContextAuth } from "../../contexts/hooks/useContextAuth";
@@ -47,16 +48,19 @@ export default function PostCard({ postDetail }: Props) {
     }
 
     switch (postDetail.contactType) {
-      case "whatsapp":
+      case "Whatsapp":
         setIconContact(wppIcon);
         break;
-      case "direct-phone":
+      case "Telefono directo":
         setIconContact(phoneIcon);
         break;
-      case "personal-page":
+      case "Pagina personal":
         setIconContact(webIcon);
         break;
-      case "none":
+      case "Correo":
+        setIconContact(emailIcon);
+        break;
+      case "Ninguno":
         setIconContact("");
         break;
       default:
@@ -77,12 +81,24 @@ export default function PostCard({ postDetail }: Props) {
 
   const hanlderRedirectToContact = () => {
     if (
-      postDetail.contactType === "personal-page" ||
-      postDetail.contactType === "whatsapp"
+      postDetail.contactType === "Pagina personal" ||
+      postDetail.contactType === "Whatsapp"
     ) {
       window.location.href = postDetail.contactValue;
     }
-    if (postDetail.contactType === "direct-phone") {
+    if (postDetail.contactType === "Correo") {
+      const mailtoLink =
+        "mailto:" +
+        postDetail.contactValue +
+        "?subject=" +
+        encodeURIComponent("Contacta con el proveedor") +
+        "&body=" +
+        encodeURIComponent("Hola, quisiera contactar con usted.");
+
+      // Abrir el enlace mailto
+      return (window.location.href = mailtoLink);
+    }
+    if (postDetail.contactType === "Telefono directo") {
       navigator.clipboard.writeText(postDetail.contactValue);
       alert(
         `El telefono ${postDetail.contactValue} fue copiado en su portapapeles`
