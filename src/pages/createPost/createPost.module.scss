@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 30%;
+  padding-top: 5%;
   .containerImages {
     width: 50%;
   }
@@ -10,7 +12,11 @@
 
 
 @media screen and (min-width: 270px) and (max-width: 767px) {
-  .containerImages {
-    width: 100%;
+  .container{
+    padding: 5%;
+    
+    .containerImages {
+      width: 80%;
+    }
   }
 }
