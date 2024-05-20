@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { RespVeriyToken } from "../../hooks/useLogin";
 
-interface StateAuthContext {
+export interface StateAuthContext {
   statusUser: RespVeriyToken;
   isLoggedUser: React.MutableRefObject<() => Promise<RespVeriyToken>>;
   logOutUser: () => Promise<void>;

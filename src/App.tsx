@@ -15,15 +15,26 @@ import Contact from "./pages/contact/contact";
 import EditPost from "./pages/editPost/editPost";
 import SearchPost from "./pages/search/searchPost";
 import { useContextLoader } from "./contexts/hooks/useContextLoader";
+import useBlockAccesPrivteRoutes from "./hooks/useBlockAccesPrivteRoutes";
+import NotFound from "./components/notFound/notFound";
 
 function App() {
   const contextLoader = useContextLoader();
+  const { isBlockPage } = useBlockAccesPrivteRoutes();
 
+  if (isBlockPage)
+    return (
+      <div className="home">
+        <Navbar />
+        <NotFound />
+      </div>
+    );
   return (
     <div className="home">
       <Navbar />
       <Presentation />
       {contextLoader?.LoaderAllViewport}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<Create />} />
@@ -36,14 +47,10 @@ function App() {
         <Route path="/events" element={<Home />} />
         <Route path="/useful-info" element={<Home />} />
         <Route path="/search" element={<SearchPost />} />
-        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </div>
   );
 }
-
-const ErrorPage = () => (
-  <div style={{ margin: "0 auto" }}> No se encontro la pagina </div>
-);
 
 export default App;
