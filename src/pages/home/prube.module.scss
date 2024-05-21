@@ -1,6 +1,7 @@
 .container {
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-block: 5%;
@@ -15,6 +16,15 @@
     background-color: rgb(255, 255, 255);
     background-repeat: repeat;
     min-height: 200vh;
+  }
+  .warningCategory{
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    b{
+      color: green;
+    }
   }
   .infiniteScroll{
     padding-block: 5%;
@@ -34,6 +44,11 @@
       columns: 2;
       column-gap: 0px;
       border-radius: 0.5rem;
+    }
+    .warningCategory{
+      width: 80%;
+      font-size: 1rem;
+      font-weight: 100;
     }
     .infinite-scroll-component__outerdiv {
       width: 100%;

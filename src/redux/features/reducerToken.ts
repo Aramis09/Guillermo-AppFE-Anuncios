@@ -8,7 +8,7 @@ const initialState: State = {
   token: null
 };
 
-export const exampleSlice = createSlice({
+export const tokenSlice = createSlice({
   name: 'TokenReducer',
   initialState,
   reducers: {
@@ -22,8 +22,8 @@ export const exampleSlice = createSlice({
 });
 
 
-export const { setToken, deleteToken } = exampleSlice.actions //!Actions change our global state
+export const { setToken, deleteToken } = tokenSlice.actions //!Actions change our global state
 
-const reducer = exampleSlice.reducer //! Reducer is action manager  
+const reducer = tokenSlice.reducer //! Reducer is action manager  
 
 export default reducer;

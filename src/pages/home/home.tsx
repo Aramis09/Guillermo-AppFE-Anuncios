@@ -10,13 +10,17 @@ import { buildSectionName } from "./utils/buildSectionName";
 import { useContextLoader } from "../../contexts/hooks/useContextLoader";
 import Error from "../../components/Error/error";
 import Empty from "../../components/Empty/Empty";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { setCategorySelected as setGlobalCategorySelected } from "../../redux/features/postSlice"; //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
 
 export default function Home() {
   const { pathname } = useLocation();
+  const dispatchAction = useAppDispatch();
   const contextLoader = useContextLoader();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [posts, setPosts] = useState<ResponseGetPosts>();
   const [categorySelected, setCategorySelected] = useState<string[]>([]);
+
   const {
     isSuccess,
     data: newData,
@@ -69,10 +73,13 @@ export default function Home() {
   }) => {
     contextLoader?.setLoaderStatus(true);
     if (categorySelected === "delete") {
+      dispatchAction(setGlobalCategorySelected(false));
       return setCategorySelected(() => []);
     }
     // setPosts(undefined); //!Borramos los que ya hay
     setCurrentPage(1); //!reiniciamos la page asi el useEffect  de arriba cargue los nuevos archivos
+    dispatchAction(setGlobalCategorySelected(true)); //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
+
     setCategorySelected(() => [categorySelected]); //! seteamos la categoria nueva
   };
 
@@ -83,7 +90,6 @@ export default function Home() {
           onClick={handlerChangeCategory}
           valueSelected={categorySelected[0]}
         />
-        {/* {LoaderAllViewport} */}
         <Error />
       </>
     );
@@ -103,8 +109,16 @@ export default function Home() {
         onClick={handlerChangeCategory}
         valueSelected={categorySelected[0]}
       />
+      {categorySelected.length ? (
+        <p className={s.warningCategory}>
+          Resultados de categoria <b>{categorySelected[0]}</b> de todas las
+          secciones
+        </p>
+      ) : (
+        <></>
+      )}
       <InfiniteScroll
-        dataLength={posts.data.length} //! ESTE ES EL ERROR NO LO TRAIGO SIEMPRE DEL BACCKENDThis is important field to render the next data
+        dataLength={posts.data.length} //! This is important field to render the next data
         next={hanlderMoreDataScroll}
         hasMore={true}
         scrollThreshold={0.7}
