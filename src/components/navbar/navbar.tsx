@@ -9,12 +9,21 @@ import iconLogout from "../../assets/icons/logout.svg";
 import s from "./navbar.module.scss";
 import { useChangeStylesClick } from "../../hooks/useChangeStylesClick";
 import { useContextAuth } from "../../contexts/hooks/useContextAuth";
-import { useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { setCategorySelected } from "../../redux/features/postSlice";
 
 export default function Navbar() {
   const location = useLocation().pathname;
   const contextAuth = useContextAuth();
   const { categorySelected } = useAppSelector((state) => state.post);
+  const dispatch = useAppDispatch();
+
+  const deleteCategorySelected = () => {
+    if (!categorySelected.length) return;
+    console.log("Si entreee");
+
+    dispatch(setCategorySelected([]));
+  };
   const { style, changeStyles } = useChangeStylesClick({
     styles: s,
     first: "containerHiden",
@@ -40,8 +49,8 @@ export default function Navbar() {
         <Link
           to="/"
           className={s.links}
-          // onClick={changeStyles}
-          style={styleSelected("/", location, categorySelected)}
+          onClick={() => deleteCategorySelected()}
+          style={styleSelected("/", location, !!categorySelected.length)}
         >
           <img src={iconMain} alt="homeImg" />
           <p className={s.textHiden}>Principal</p>
@@ -49,8 +58,12 @@ export default function Navbar() {
         <Link
           to="/useful-info"
           className={s.links}
-          // onClick={changeStyles}
-          style={styleSelected("/useful-info", location, categorySelected)}
+          onClick={deleteCategorySelected}
+          style={styleSelected(
+            "/useful-info",
+            location,
+            !!categorySelected.length
+          )}
         >
           <img src={iconNews} alt="eventsImg" />
           <p className={s.textHiden}>Informacio Util</p>
@@ -58,8 +71,8 @@ export default function Navbar() {
         <Link
           to="/events"
           className={s.links}
-          // onClick={changeStyles}
-          style={styleSelected("/events", location, categorySelected)}
+          onClick={deleteCategorySelected}
+          style={styleSelected("/events", location, !!categorySelected.length)}
         >
           <img src={iconEvents} alt="eventsImg" />
           <p className={s.textHiden}>Eventos</p>
@@ -69,7 +82,11 @@ export default function Navbar() {
             to="/search"
             className={s.linkSearch}
             onClick={changeStyles}
-            style={styleSelected("/search", location, categorySelected)}
+            style={styleSelected(
+              "/search",
+              location,
+              !!categorySelected.length
+            )}
           >
             <img src={iconSearch} alt="eventsImg" />
             <p className={s.textHiden}>Buscar anuncio</p>
@@ -83,7 +100,7 @@ export default function Navbar() {
           className={s.linkAdmin}
           onClick={changeStyles}
           style={{
-            ...styleSelected("/create", location, categorySelected),
+            ...styleSelected("/create", location, !!categorySelected.length),
             display:
               !contextAuth?.statusUser.acces || window.innerWidth < 1024
                 ? "none"
@@ -112,7 +129,7 @@ export default function Navbar() {
             className={s.linkAdmin}
             onClick={changeStyles}
             style={{
-              ...styleSelected("/create", location, categorySelected),
+              ...styleSelected("/create", location, !!categorySelected.length),
               display: !contextAuth?.statusUser.acces ? "none" : "flex",
             }}
           >
@@ -124,7 +141,7 @@ export default function Navbar() {
             className={s.linkSearch}
             onClick={changeStyles}
             style={{
-              ...styleSelected("/search", location, categorySelected),
+              ...styleSelected("/search", location, !!categorySelected.length),
               display: !contextAuth?.statusUser.acces ? "none" : "flex",
             }}
           >

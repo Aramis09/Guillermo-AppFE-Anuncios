@@ -1,7 +1,6 @@
 import s from "./categories.module.scss";
 import { useMakeRequest } from "../../hooks/useMakeRequest";
 import { ResponseGetAllCategories } from "../../interfaces/interfaces";
-import { useEffect } from "react";
 import { useContextAuth } from "../../contexts/hooks/useContextAuth";
 
 interface Props {
@@ -12,30 +11,23 @@ interface Props {
 
 export default function Categories({ onClick, valueSelected }: Props) {
   const contextAuth = useContextAuth();
-  const categorySelectedFound = localStorage.getItem("categorySelected");
   const { result: categories } = useMakeRequest<ResponseGetAllCategories>({
     url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
   });
+  console.log(valueSelected, "<<<<-----");
 
   const handleCategoriesSelected = async (
     evt: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    localStorage.setItem("categorySelected", evt.target.value);
     onClick({ categorySelected: evt.target.value });
   };
 
-  useEffect(() => {
-    //!Borra lo guardado en el localStorage para que cuando el usuario salga esto se borre.
-    return () => {
-      localStorage.removeItem("categorySelected");
-    };
-  }, []);
   return (
     <select
       name="categories"
       id="categories"
       required
-      value={valueSelected}
+      value={valueSelected || ""}
       onChange={handleCategoriesSelected}
       className={s.container}
       style={{
@@ -51,7 +43,7 @@ export default function Categories({ onClick, valueSelected }: Props) {
           key={category.id}
           value={category.name}
           style={
-            categorySelectedFound === category.name
+            valueSelected === category.name
               ? {
                   backgroundColor: "#136fc6",
                   color: "white",

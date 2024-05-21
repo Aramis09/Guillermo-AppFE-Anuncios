@@ -10,7 +10,7 @@ import { buildSectionName } from "./utils/buildSectionName";
 import { useContextLoader } from "../../contexts/hooks/useContextLoader";
 import Error from "../../components/Error/error";
 import Empty from "../../components/Empty/Empty";
-import { useAppDispatch } from "../../redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { setCategorySelected as setGlobalCategorySelected } from "../../redux/features/postSlice"; //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
   const contextLoader = useContextLoader();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [posts, setPosts] = useState<ResponseGetPosts>();
-  const [categorySelected, setCategorySelected] = useState<string[]>([]);
+  const { categorySelected } = useAppSelector((state) => state.post);
 
   const {
     isSuccess,
@@ -37,13 +37,7 @@ export default function Home() {
     if (currentPage === 1 && newData?.currentPage === 1)
       //!Como el estado es undefines, entonces lo agregamos al primero como base, es necesario para  la primera request
       return setPosts(newData);
-    if (
-      newData &&
-      newData.data.length !== 0
-      // &&
-      // newData.currentPage !== currentPage &&
-      // newData.currentPage > currentPage
-    ) {
+    if (newData && newData.data.length !== 0) {
       setPosts((prev) => {
         //!concatenamos con lo ya existente
         if (!prev) return;
@@ -73,14 +67,10 @@ export default function Home() {
   }) => {
     contextLoader?.setLoaderStatus(true);
     if (categorySelected === "delete") {
-      dispatchAction(setGlobalCategorySelected(false));
-      return setCategorySelected(() => []);
+      return dispatchAction(setGlobalCategorySelected([]));
     }
-    // setPosts(undefined); //!Borramos los que ya hay
     setCurrentPage(1); //!reiniciamos la page asi el useEffect  de arriba cargue los nuevos archivos
-    dispatchAction(setGlobalCategorySelected(true)); //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
-
-    setCategorySelected(() => [categorySelected]); //! seteamos la categoria nueva
+    dispatchAction(setGlobalCategorySelected([categorySelected])); //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
   };
 
   if (!posts || isError)
@@ -103,6 +93,12 @@ export default function Home() {
         <Empty />
       </>
     );
+
+  console.log(
+    "No entiendo porque no se muestra correctamente >-->",
+    categorySelected
+  );
+
   return (
     <div className={s.container}>
       <Categories

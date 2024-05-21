@@ -1,19 +1,20 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface State {
-  categorySelected: boolean
+  categorySelected: string[]
 }
 
 const initialState: State = {
-  categorySelected: false
+  categorySelected: []
+
 };
 
 export const postSlice = createSlice({
   name: 'TokenReducer',
   initialState,
   reducers: {
-    setCategorySelected: (state, action: PayloadAction<boolean>) => { //!actions to change global state, we can use this on buttons or anything 
-      state.categorySelected = action.payload
+    setCategorySelected: (state, action: PayloadAction<string[]>) => { //!actions to change global state, we can use this on buttons or anything 
+      state.categorySelected = [...action.payload]
     },
 
   }
