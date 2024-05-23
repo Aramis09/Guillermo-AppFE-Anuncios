@@ -252,7 +252,10 @@
   }
 
   .size1:hover,
-  .size2:hover,
+  .size2:hover {
+    z-index: 2000;
+    transform: scale(1.4);
+  }
   .size3:hover {
     z-index: 2000;
     transform: scale(1.2);
