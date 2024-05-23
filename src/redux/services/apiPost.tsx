@@ -33,7 +33,7 @@ export const postApi = createApi({
         page: number;
         urlCategories: string;
         categories: string[] | undefined;
-        section: "Main" | "Events" | "Useful%20Information";
+        section: "Principal" | "Eventos" | "Informacion%20Util";
       }
     >({
       query: ({ url, urlCategories, page, categories, section }) => {

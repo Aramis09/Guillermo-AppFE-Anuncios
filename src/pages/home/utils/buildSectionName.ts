@@ -1,12 +1,13 @@
 export const buildSectionName = (pathName: string) => {
   switch (pathName) {
     case "/":
-      return "Main"
+      return "Principal"
     case "/useful-info":
-      return "Useful%20Information"
+      return "Informacion%20Util"
     case "/events":
-      return "Events"
+      return "Eventos"
     default:
-      return "Main"
+      return "Principal"
   }
 }
+
