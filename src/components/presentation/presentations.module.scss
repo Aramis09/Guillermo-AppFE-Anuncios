@@ -28,15 +28,36 @@
       padding: 1rem;
       border-radius: 0.2rem;
     }
-    button,.button {
-      width: 20%;
-      min-height: 40px;
-      border-radius: 0.5rem;
-      border: none;
-      background-color: #bf3a5b;
-      color: white;
-      line-height: 40px;
-      text-align: center;
+
+    .containerLinks {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      button,.button {
+        width: 50%;
+        min-height: 40px;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: #bf3a5b;
+        color: white;
+        line-height: 40px;
+        text-align: center;
+      }
+      .share{
+        border-radius: 100%;
+        width: 40px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          filter: blur(0px);
+          width: 30px;
+          height: 30px;
+        }
+      }
     }
   }
 }
@@ -58,11 +79,8 @@
     h2 {
       font-size: 2rem;
     }
-    button,.button {
-      width: 100%;
-      border-radius: 0.2rem;
-    }
   }
+
 }
 }
 
