@@ -29,13 +29,14 @@
   .containerCard{
     display: flex;
     flex-direction: column;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     h5{
       font-size: 1.3rem;
       font-weight: 400;
     }
   }
+  
   .containerData {
     width: 80vw;
     padding: 5%;

@@ -14,13 +14,13 @@ export default function Presentation() {
       <img src={imgBk} alt="background" />
       <div className={s.containerText}>
         <h2 className={s.containerBigText}>
-          Esta es la pagina comercial de <br />
-          <span>PARQUE PATRICIOS</span>
+          Comercial
+          <br /> <span>PARQUE PATRICIOS</span>
         </h2>
         <p>
-          Ud. encontrara informacion, datos, puntos de interes, anunciantes
+          Ud. encontrara Información útil, anuncios y eventos del barrio...
           <br />
-          todo para hacer de nuestro barrio cada dia mejor...
+          {/* todo para hacer de nuestro barrio cada dia mejor... */}
         </p>
         <Link to="/contact" className={s.button}>
           PUBLICITE AQUI

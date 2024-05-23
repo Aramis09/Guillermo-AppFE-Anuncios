@@ -5,10 +5,12 @@ import FormToSavePost from "./formToSavePost";
 import ImagesCloudinary from "../../components/imagesCloudinary/imagesCloudinary";
 import { ParamsHanlderCreatePost } from "../../interfaces/interfaces";
 import { useCreatePostMutation } from "../../redux/services/apiPost";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const [publicId, setPublicId] = useState<string>("");
   const [createPost] = useCreatePostMutation();
+  const navigate = useNavigate();
   const save = async ({
     contactType,
     contactValue,
@@ -31,7 +33,9 @@ export default function CreatePost() {
       owner,
       expire,
     })
-      .then(() => alert("El anuncio fue creado!"))
+      .then(() => {
+        navigate("/create");
+      })
       .catch(() => alert("Hubo un error, contacte al desarrollador"));
   };
 

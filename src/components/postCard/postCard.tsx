@@ -84,7 +84,7 @@ export default function PostCard({ postDetail }: Props) {
       postDetail.contactType === "Pagina personal" ||
       postDetail.contactType === "Whatsapp"
     ) {
-      window.location.href = postDetail.contactValue;
+      window.open(postDetail.contactValue, "_blank");
     }
     if (postDetail.contactType === "Correo") {
       const mailtoLink =
@@ -127,11 +127,7 @@ export default function PostCard({ postDetail }: Props) {
           <></>
         )}
         {contextAuth?.statusUser.acces ? (
-          <Link
-            to={`/edit/${postDetail.id}`}
-            target="_blank"
-            className={s.contact}
-          >
+          <Link to={`/edit/${postDetail.id}`} className={s.contact}>
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
         ) : (
