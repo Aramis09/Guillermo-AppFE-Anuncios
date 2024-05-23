@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BodyCreatePost, ResponseGetPosts } from "../../interfaces/interfaces";
+import {
+  BodyCreatePost,
+  ResponseGetAllCategories,
+  ResponseGetPosts,
+} from "../../interfaces/interfaces";
 import { getCookie } from "../../utils/cookies";
 
 export interface BodyDataSppCart {
@@ -24,7 +28,7 @@ export const postApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["getPostUpdateDelete", "getPostUpdateCreate"],
+  tagTypes: ["getPostUpdateDelete", "getPostUpdateCreate", "getCategoryList"],
   endpoints: (builder) => ({
     getPostList: builder.query<
       ResponseGetPosts,
@@ -72,6 +76,31 @@ export const postApi = createApi({
       }),
       invalidatesTags: ["getPostUpdateCreate"],
     }),
+    getCategoryList: builder.query<ResponseGetAllCategories, void>({
+      query: () => ({
+        url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
+        method: "get",
+      }),
+      providesTags: ["getCategoryList"],
+    }),
+    createCategory: builder.mutation({
+      query: (body: { categories: string[] }) => ({
+        url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
+        method: "post",
+        body,
+      }),
+      invalidatesTags: ["getCategoryList"],
+    }),
+    deleteCategory: builder.mutation({
+      query: (categoryForDelete: string) => ({
+        url: `${import.meta.env.VITE_SOME_BASE_URL}/category`,
+        method: "delete",
+        body: {
+          name: categoryForDelete,
+        },
+      }),
+      invalidatesTags: ["getCategoryList"],
+    }),
   }),
 });
 
@@ -80,4 +109,7 @@ export const {
   useSearchPostByOwnerQuery,
   useDeletePostMutation,
   useCreatePostMutation,
+  useGetCategoryListQuery,
+  useDeleteCategoryMutation,
+  useCreateCategoryMutation,
 } = postApi;

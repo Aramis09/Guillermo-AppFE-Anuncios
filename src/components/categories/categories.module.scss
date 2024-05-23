@@ -12,6 +12,23 @@
   }
 }
 
+.containerTable{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .itemTable{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 2rem;
+    }
+  }
+}
+
 @media screen and (min-width: 270px) and (max-width: 1024px) {
   .container {
     width: 100%;
