@@ -68,10 +68,12 @@ export default function Home() {
   }) => {
     contextLoader?.setLoaderStatus(true);
     if (categorySelected === "delete") {
-      return dispatchAction(setGlobalCategorySelected([]));
+      dispatchAction(setGlobalCategorySelected([]));
+      return window.scrollTo(0, 0);
     }
     setCurrentPage(1); //!reiniciamos la page asi el useEffect  de arriba cargue los nuevos archivos
     dispatchAction(setGlobalCategorySelected([categorySelected])); //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
+    return window.scrollTo(0, 0);
   };
   console.log(isError);
 
@@ -98,11 +100,6 @@ export default function Home() {
         <Empty />
       </>
     );
-
-  console.log(
-    "No entiendo porque no se muestra correctamente >-->",
-    categorySelected
-  );
 
   return (
     <div className={s.container}>

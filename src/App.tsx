@@ -17,11 +17,12 @@ import SearchPost from "./pages/search/searchPost";
 import { useContextLoader } from "./contexts/hooks/useContextLoader";
 import useBlockAccesPrivteRoutes from "./hooks/useBlockAccesPrivteRoutes";
 import NotFound from "./components/notFound/notFound";
+import useUpScroll from "./hooks/useUpScroll";
 
 function App() {
   const contextLoader = useContextLoader();
   const { isBlockPage } = useBlockAccesPrivteRoutes();
-
+  useUpScroll();
   if (isBlockPage)
     return (
       <div className="home">
