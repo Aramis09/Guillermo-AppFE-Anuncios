@@ -85,7 +85,7 @@ export default function Home() {
         <Error />
       </>
     );
-  if (!posts && !isError) {
+  if (!posts) {
     return <StaticLoader />;
   }
   if (posts && !posts.data.length)
