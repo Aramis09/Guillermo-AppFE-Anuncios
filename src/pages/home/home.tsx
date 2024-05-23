@@ -12,6 +12,7 @@ import Error from "../../components/Error/error";
 import Empty from "../../components/Empty/Empty";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { setCategorySelected as setGlobalCategorySelected } from "../../redux/features/postSlice"; //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
+import { StaticLoader } from "../../components/loader/loader";
 
 export default function Home() {
   const { pathname } = useLocation();
@@ -72,8 +73,9 @@ export default function Home() {
     setCurrentPage(1); //!reiniciamos la page asi el useEffect  de arriba cargue los nuevos archivos
     dispatchAction(setGlobalCategorySelected([categorySelected])); //?Esto unicamente sirve para que cuendo se seleccione una categoria no se muestre una seccion resaltada en navbar, ya que se busca en todas.
   };
+  console.log(isError);
 
-  if (!posts || isError)
+  if (!posts && isError)
     return (
       <>
         <Categories
@@ -83,7 +85,10 @@ export default function Home() {
         <Error />
       </>
     );
-  if (!posts.data.length)
+  if (!posts && !isError) {
+    return <StaticLoader />;
+  }
+  if (posts && !posts.data.length)
     return (
       <>
         <Categories

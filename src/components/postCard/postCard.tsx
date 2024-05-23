@@ -7,7 +7,7 @@ import { Cloudinary } from "@cloudinary/url-gen/index";
 import { AdvancedImage } from "@cloudinary/react";
 import wppIcon from "../../assets/icons/wpp.svg";
 import phoneIcon from "../../assets/icons/phone.svg";
-import webIcon from "../../assets/icons/web.svg";
+import webIcon from "../../assets/icons/web.png";
 import editIcon from "../../assets/icons/edit.svg";
 import emailIcon from "../../assets/icons/email.svg";
 
@@ -127,7 +127,11 @@ export default function PostCard({ postDetail }: Props) {
           <></>
         )}
         {contextAuth?.statusUser.acces ? (
-          <Link to={`/edit/${postDetail.id}`} className={s.contact}>
+          <Link
+            to={`/edit/${postDetail.id}`}
+            target="_blank"
+            className={s.contact}
+          >
             <img src={editIcon} alt="contact" className={s.contact} />
           </Link>
         ) : (
